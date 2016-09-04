@@ -9,67 +9,65 @@
     <link rel="stylesheet" href="css/module.css">
   </head>
   <body>
-    <nav id="menu">
-      <h1>Washington Attorney General Complaints(working title)</h1>
-      <ul>
-        <li>Home</li>
-        <li>Team</li>
-        <li>About</li>
-      </ul>
-    </nav>
+    <header>
+      <nav id="menu">
+        <h1>Washington Attorney General Complaints(working title)</h1>
+        <ul>
+          <li>Home</li>
+          <li>About</li>
+        </ul>
+      </nav>
+    </header>
 
+    <main>
+      <section id="home" class="tab-content">
+        <article id="search">
+          <form>
+            <label>
+              Type in a Business Name
+            </label>
+            <input type="search">
+            </input>
+            <select id="category-filter">
+              <option> --Filter by Category -- </option>
+            </select>
+            <button type="submit">Submit</button>
+          </form>
+        </article>
+        <article id="results">
+          <h1>Search Results section is here</h1>
+        </article>
+      </section>
 
-   <section id="home">
-    <form>
-      <label>
-        Type in a Business Name
-      </label>
-      <input type="search">
-      </input>
-      <select id="category-filter">
-        <option> --Filter by Category -- </option>
-      </select>
-      <button type="submit">Submit</button>
-    </form>
-  </section>
+      <section id="about" class="tab-content">
+        <article class="about-project">
+          <h1>Details about this project</h1>
+        </article>
+        <article class="team">
+          <h1>Pics and other stuff about how awesome we are</h1>
+        </article>
+      </section>
+    </main>
 
-  <section id="results">
-    <h1>Search Results section is here</h1>
-  </section>
+    <footer>
+      DISCLAIMER FOOTER:  The existence of a complaint is not evidence of wrongdoing.
+    </footer>
+    <!-- vendor scripts -->
+    <script src="vendor/scripts/handlebars.js"></script>
+    <script src="vendor/scripts/highlight.pack.js"></script>
+    <script src="vendor/scripts/html5sql.js"></script>
+    <script src="vendor/scripts/jquery-2.1.4.js"></script>
+    <script src="vendor/scripts/marked.js"></script>
+    <script src="vendor/scripts/page.js"></script>
+    <script src="vendor/scripts/webdb.js"></script>
 
-  <section id="team">
-    <h1>Pics and other stuff about how awesome we are</h1>
-  </section>
+    <!-- controller script -->
+    <script src="scripts/controller/complaintsController.js"></script>
 
-  <section id="about">
-    <h1>Details about this project</h1>
-  </section>
+    <!-- model view -->
+    <script src="scripts/model/complaintsModel.js"></script>
 
-
-
-
-
-
-
-  <footer>
-    DISCLAIMER FOOTER: Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-  </footer>
-  <!-- vendor scripts -->
-  <script src="vendor/scripts/handlebars.js"></script>
-  <script src="vendor/scripts/highlight.pack.js"></script>
-  <script src="vendor/scripts/html5sql.js"></script>
-  <script src="vendor/scripts/jquery-2.1.4.js"></script>
-  <script src="vendor/scripts/marked.js"></script>
-  <script src="vendor/scripts/page.js"></script>
-  <script src="vendor/scripts/webdb.js"></script>
-
-  <!-- controller script -->
-  <script src="scripts/controller/complaintsController.js"></script>
-
-  <!-- model view -->
-  <script src="scripts/model/complaintsModel.js"></script>
-
-  <!-- vendor script -->
-  <script src="scripts/view/complaintsView.js"></script>
+    <!-- vendor script -->
+    <script src="scripts/view/complaintsView.js"></script>
   </body>
 </html>
