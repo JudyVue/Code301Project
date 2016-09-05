@@ -18,11 +18,12 @@
     return allunique;
   };
 
-  Complaint.searchByCategory = function(){
-
+  Complaint.searchByCategory = function(query){
+//select by category where businesscategory matches searched category
   }
 
-  Complaint.searchByName = function(){
+  Complaint.searchByName = function(query){
+    //select by name where business matches searched name
 
   }
 
