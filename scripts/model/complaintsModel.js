@@ -28,10 +28,11 @@
   };
 
   Complaint.loadAll = function(rows){
-    //TODO: Don't load if buisness name is unknown.
+    //TODO: DONE Don't load if buisness name is unknown.
     Complaint.allComplaints = rows.map(function(ele){
-      return new Complaint(ele);
-      console.log('all complaints are loaded into Complaint.allComplaints');
+      if (ele.business !== 'Unknown') {
+        return new Complaint(ele);
+      }
     });
   };
 
