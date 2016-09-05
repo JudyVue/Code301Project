@@ -4,15 +4,26 @@
 
   var complaintsView = {};
 
-  complaintsView.populateAutoComplete = function() {
-    // $('input').autocomplete({
-    //   source: Complaint.allBusinessNames()
-    // });
-    // // console.log('autocomplete is working');
+  complaintsView.autoCompleteName = function() {
+    $('#business_name').autocomplete({
+      source: Complaint.selectUniqueInColumn('business')
+    });
+  };
+
+  complaintsView.autoCompleteCategory = function() {
+    $('#category_name').autocomplete({
+      source: Complaint.selectUniqueInColumn('businesscategory')
+    });
+  };
+
+  complaintsView.render = function(){
+    complaintsView.autoCompleteName();
+    complaintsView.autoCompleteCategory();
   };
 
 
-  Complaint.updateData(complaintsView.populateAutoComplete);
+
+  Complaint.updateData(complaintsView.render);
 
   module.complaintsView = complaintsView;
 })(window);

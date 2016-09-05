@@ -8,15 +8,11 @@
 
   Complaint.allComplaints = [];
 
-  Complaint.allBusinessCategories = function(callback) {
-    webDB.execute('SELECT DISTINCT businesscategory FROM complaints;', callback);
-  };
-
   Complaint.selectUniqueInColumn = function(column) {
     var allunique = [];
     webDB.execute('SELECT DISTINCT ' + column + ' FROM complaints;', function(rows){
       rows.forEach(function(ele){
-        allbusinesses.push(ele.business);
+        allunique.push(ele[column]);
       });
     });
     return allunique;
