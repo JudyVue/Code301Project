@@ -16,6 +16,10 @@
     });
   };
 
+  complaintsView.getQuery = function(){
+    //eventhandeler for search form. calls methods based on query and renders results. 
+  }
+
   complaintsView.render = function(){
     complaintsView.autoCompleteName();
     complaintsView.autoCompleteCategory();
