@@ -1,6 +1,6 @@
 'use strict';
 
-page('/home', homeController.reveal);
+page('/', homeController.reveal);
 page('/results', resultsController.reveal);
 page('/about', aboutController.reveal);
 
