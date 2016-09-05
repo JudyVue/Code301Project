@@ -1,3 +1,7 @@
 section {
   outline: dotted 5px orange;
 }
+
+input {
+  display: block;
+}
