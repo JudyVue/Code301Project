@@ -8,14 +8,15 @@
     <link rel="stylesheet" href="css/layout.css">
     <link rel="stylesheet" href="css/module.css">
   </head>
+
   <body>
     <header>
-      <nav id="menu">
+      <nav id="navigation">
         <h1>Washington Attorney General Complaints(working title)</h1>
-        <ul>
-          <li>Home</li>
-          <li>About</li>
-        </ul>
+          <ul>
+            <li><a href="/home">Home</a></li>
+            <li><a href="/about">About</a></li>
+          </ul>
       </nav>
     </header>
 
@@ -61,13 +62,16 @@
     <script src="vendor/scripts/page.js"></script>
     <script src="vendor/scripts/webdb.js"></script>
 
-    <!-- controller script -->
-    <script src="scripts/controller/complaintsController.js"></script>
+    <!-- controller scripts -->
+    <script src="scripts/controller/homeController.js"></script>
+    <script src="scripts/controller/resultsController.js"></script>
+    <script src="scripts/controller/aboutController.js"></script>
+    <script src="scripts/controller/routes.js"></script>
 
     <!-- model view -->
     <script src="scripts/model/complaintsModel.js"></script>
 
-    <!-- vendor script -->
+    <!-- view script -->
     <script src="scripts/view/complaintsView.js"></script>
   </body>
 </html>
