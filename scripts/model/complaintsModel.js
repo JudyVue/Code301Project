@@ -7,6 +7,20 @@
 
   Complaint.allComplaints = [];
 
+  Complaint.allBusinessCategories = function(callback) {
+    webDB.execute('SELECT DISTINCT businesscategory FROM complaints;', callback);
+  };
+
+  Complaint.allBusinessNames = function() {
+    webDB.execute('SELECT DISTINCT business FROM complaints;', function(rows){
+      rows.map(function(row){
+        console.log(row.business);
+        return row.business;
+      });
+    });
+  };
+
+
   Complaint.loadAll = function(rows){
     Complaint.allComplaints = rows.map(function(ele){
       return new Complaint(ele);
@@ -72,7 +86,7 @@
     }
   );};
 
-  Complaint.updateData = function() {
+  Complaint.updateData = function(callback) {
     webDB.execute('SELECT * FROM complaints', function(rows) {
       if (!rows.length){
         $.get('https://data.wa.gov/resource/fuxx-yeeu.json?&$$app_token=fi6PA6s5JICb5OJ323FV5nYsy')
@@ -82,11 +96,13 @@
             var complaint = new Complaint(item);
             complaint.insertRecord();
             Complaint.allComplaints.push(item);
+            callback();
           });
         });
       }
       else{
         Complaint.loadAll(rows);
+        callback();
       }
     });
   };
@@ -98,6 +114,5 @@
   };
 
   Complaint.createTable();
-  Complaint.updateData();
   module.Complaint = Complaint;
 })(window);

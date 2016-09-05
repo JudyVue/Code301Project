@@ -4,16 +4,15 @@
 
   var complaintsView = {};
 
-  var testArray = ['apple', 'bobcat', 'cheetah'];
-
-  complaintsView.autoCompleteBusinessNameSearchField = function() {
-    $('input').autocomplete({
-      source: testArray
-    });
-    console.log('working?');
+  complaintsView.populateAutoComplete = function() {
+    // $('input').autocomplete({
+    //   source: Complaint.allBusinessNames()
+    // });
+    // // console.log('autocomplete is working');
   };
 
-  complaintsView.autoCompleteBusinessNameSearchField();
+
+  Complaint.updateData(complaintsView.populateAutoComplete);
 
   module.complaintsView = complaintsView;
 })(window);
