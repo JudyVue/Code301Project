@@ -17,7 +17,8 @@
   };
 
   complaintsView.getQuery = function(){
-    //eventhandeler for search form. calls methods based on query and renders results. 
+    $('#business_name')
+    //eventhandeler for search form. calls methods based on query and renders results.
   }
 
   complaintsView.render = function(){
