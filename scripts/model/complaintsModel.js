@@ -20,12 +20,12 @@
 
   Complaint.searchByCategory = function(query){
 //select by category where businesscategory matches searched category
-  }
+  };
 
   Complaint.searchByName = function(query){
     //select by name where business matches searched name
 
-  }
+  };
 
   Complaint.loadAll = function(rows){
     //TODO: Don't load if buisness name is unknown.
@@ -103,8 +103,8 @@
             var complaint = new Complaint(item);
             complaint.insertRecord();
             Complaint.allComplaints.push(item);
-            callback();
           });
+          callback();
         });
       }
       else{
