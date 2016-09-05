@@ -49,7 +49,11 @@
   //   if (!rows.length){
       $.get('https://data.wa.gov/resource/fuxx-yeeu.json?&$$app_token=fi6PA6s5JICb5OJ323FV5nYsy')
       .done(function(data) {
-        Complaint.allComplaints = data;
+        data.forEach(function(item){
+          var complaint = new Complaint(item);
+          Complaint.allComplaints.push(complaint);
+
+        })
       });
     }
   //   else{
