@@ -8,10 +8,39 @@
   Complaint.allComplaints = [];
 
   Complaint.loadAll = function(rows){
-    Complaint.all = rows.map(function(ele){
+    Complaint.allComplaints = rows.map(function(ele){
       return new Complaint(ele);
       console.log('all complaints are loaded into Complaint.allComplaints');
     });
+  };
+
+  Complaint.prototype.insertRecord = function(){
+    webDB.execute(
+      [
+        {
+          'sql': 'INSERT INTO complaints (actualsavings, '+
+          'business, '+
+          'business_id, '+
+          'businesscategory, '+
+          'businesscity, '+
+          'businessstate, '+
+          'businessstreetline1, '+
+          'businesszip, ' +
+          'estimatedsavings, ' +
+          'geocode0, ' +
+          'geocode1, ' +
+          'geocode_city, ' +
+          'geocode_state, ' +
+          'geocode_zip, ' +
+          'complaint_id, ' +
+          'naics, ' +
+          'naicsname, ' +
+          'openeddate, ' +
+          'openedyear, ' +
+          'status) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);',
+          'data': [this.actualsavings, this.business, this.business_id, this.businesscategory, this.businesscity, this.businessstate, this.businessstreetline1, this.businesszip, this.estimatedsavings, this.geocode0, this.geocode1, this.geocode_city, this.geocode_state, this.geocode_zip, this.complaint_id, this.naics, this.naicsname, this.openeddate, this.openedyear, this.status]
+        }]
+    );
   };
 
   Complaint.createTable = function(){
@@ -20,12 +49,12 @@
         'id INTEGER PRIMARY KEY,'+
         'actualsavings VARCHAR,'+
         'business VARCHAR,'+
-        'business_id VARCHAR,'+
+        'business_id INTEGER,'+
         'businesscategory VARCHAR,'+
         'businesscity VARCHAR,'+
         'businessstate VARCHAR,'+
         'businessstreetline1 VARCHAR,'+
-        'businesszip VARCHAR,' +
+        'businesszip INTEGER,' +
         'estimatedsavings VARCHAR,' +
         'geocode0 VARCHAR,' +
         'geocode1 VARCHAR,' +
@@ -35,7 +64,7 @@
         'complaint_id VARCHAR,' +
         'naics VARCHAR,' +
         'naicsname VARCHAR,' +
-        'openeddate VARCHAR,' +
+        'openeddate DATETIME,' +
         'openedyear VARCHAR,' +
         'status VARCHAR);',
     function(){
@@ -44,22 +73,21 @@
   );};
 
   Complaint.updateData = function() {
-  //   webDB.execute('SELECT * FROM complaints', function(rows) {
-  // );
-  //   if (!rows.length){
-      $.get('https://data.wa.gov/resource/fuxx-yeeu.json?&$$app_token=fi6PA6s5JICb5OJ323FV5nYsy')
-      .done(function(data) {
-        data.forEach(function(item){
-          var complaint = new Complaint(item);
-          Complaint.allComplaints.push(complaint);
-
-        })
-      });
-    }
-  //   else{
-  //     Complaint.loadAll(rows);
-  //   }
-  // };
+    webDB.execute('SELECT * FROM complaints', function(rows) {
+      if (!rows.length){
+        $.get('https://data.wa.gov/resource/fuxx-yeeu.json?&$$app_token=fi6PA6s5JICb5OJ323FV5nYsy')
+        .done(function(data) {
+          data.forEach(function(item){
+            //TODO: DONE load into table here.
+            Complaint.allComplaints.push(item);
+          });
+        });
+      }
+      else{
+        Complaint.loadAll(rows);
+      }
+    });
+  };
 
   Complaint.withAttribute = function(attr) {
     return Complaint.allComplaints.filter(function(complaint) {
