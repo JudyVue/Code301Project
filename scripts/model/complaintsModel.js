@@ -18,6 +18,13 @@
     return allunique;
   };
 
+  Complaint.searchByCategory = function(){
+
+  }
+
+  Complaint.searchByName = function(){
+
+  }
 
   Complaint.loadAll = function(rows){
     //TODO: Don't load if buisness name is unknown.
