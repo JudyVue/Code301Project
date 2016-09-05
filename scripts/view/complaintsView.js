@@ -4,16 +4,30 @@
 
   var complaintsView = {};
 
-  var testArray = ['apple', 'bobcat', 'cheetah'];
-
-  complaintsView.autoCompleteBusinessNameSearchField = function() {
-    $('input').autocomplete({
-      source: testArray
+  complaintsView.autoCompleteName = function() {
+    $('#business_name').autocomplete({
+      source: Complaint.selectUniqueInColumn('business')
     });
-    console.log('working?');
   };
 
-  complaintsView.autoCompleteBusinessNameSearchField();
+  complaintsView.autoCompleteCategory = function() {
+    $('#category_name').autocomplete({
+      source: Complaint.selectUniqueInColumn('businesscategory')
+    });
+  };
+
+  complaintsView.getQuery = function(){
+    //eventhandeler for search form. calls methods based on query and renders results. 
+  }
+
+  complaintsView.render = function(){
+    complaintsView.autoCompleteName();
+    complaintsView.autoCompleteCategory();
+  };
+
+
+
+  Complaint.updateData(complaintsView.render);
 
   module.complaintsView = complaintsView;
 })(window);

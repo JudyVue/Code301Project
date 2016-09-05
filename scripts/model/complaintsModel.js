@@ -2,12 +2,33 @@
   function Complaint(opts){
     Object.keys(opts).forEach(function(ele, index, keys){
       this[ele] = opts[ele];
+      //TODO: unpack geodata
     }, this);
   }
 
   Complaint.allComplaints = [];
 
+  Complaint.selectUniqueInColumn = function(column) {
+    var allunique = [];
+    webDB.execute('SELECT DISTINCT ' + column + ' FROM complaints;', function(rows){
+      rows.forEach(function(ele){
+        allunique.push(ele[column]);
+      });
+    });
+    return allunique;
+  };
+
+  Complaint.searchByCategory = function(query){
+//select by category where businesscategory matches searched category
+  }
+
+  Complaint.searchByName = function(query){
+    //select by name where business matches searched name
+
+  }
+
   Complaint.loadAll = function(rows){
+    //TODO: Don't load if buisness name is unknown.
     Complaint.allComplaints = rows.map(function(ele){
       return new Complaint(ele);
       console.log('all complaints are loaded into Complaint.allComplaints');
@@ -72,7 +93,7 @@
     }
   );};
 
-  Complaint.updateData = function() {
+  Complaint.updateData = function(callback) {
     webDB.execute('SELECT * FROM complaints', function(rows) {
       if (!rows.length){
         $.get('https://data.wa.gov/resource/fuxx-yeeu.json?&$$app_token=fi6PA6s5JICb5OJ323FV5nYsy')
@@ -82,11 +103,13 @@
             var complaint = new Complaint(item);
             complaint.insertRecord();
             Complaint.allComplaints.push(item);
+            callback();
           });
         });
       }
       else{
         Complaint.loadAll(rows);
+        callback();
       }
     });
   };
@@ -98,6 +121,5 @@
   };
 
   Complaint.createTable();
-  Complaint.updateData();
   module.Complaint = Complaint;
 })(window);
