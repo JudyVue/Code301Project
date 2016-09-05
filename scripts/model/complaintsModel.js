@@ -2,6 +2,7 @@
   function Complaint(opts){
     Object.keys(opts).forEach(function(ele, index, keys){
       this[ele] = opts[ele];
+      //TODO: unpack geodata
     }, this);
   }
 
@@ -11,17 +12,19 @@
     webDB.execute('SELECT DISTINCT businesscategory FROM complaints;', callback);
   };
 
-  Complaint.allBusinessNames = function() {
-    webDB.execute('SELECT DISTINCT business FROM complaints;', function(rows){
-      rows.map(function(row){
-        console.log(row.business);
-        return row.business;
+  Complaint.selectUniqueInColumn = function(column) {
+    var allunique = [];
+    webDB.execute('SELECT DISTINCT ' + column + ' FROM complaints;', function(rows){
+      rows.forEach(function(ele){
+        allbusinesses.push(ele.business);
       });
     });
+    return allunique;
   };
 
 
   Complaint.loadAll = function(rows){
+    //TODO: Don't load if buisness name is unknown.
     Complaint.allComplaints = rows.map(function(ele){
       return new Complaint(ele);
       console.log('all complaints are loaded into Complaint.allComplaints');
