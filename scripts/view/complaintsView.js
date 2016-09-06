@@ -4,18 +4,9 @@
 
   var complaintsView = {};
 
-  
-  var render = function(article) {
-    var template = Handlebars.compile($('#company-name-template').text());
-
-    article.daysAgo =
-      parseInt((new Date() - new Date(article.publishedOn))/60/60/24/1000);
-    article.publishStatus =
-      article.publishedOn ? 'published ' +
-      article.daysAgo + ' days ago' : '(draft)';
-    article.body = marked(article.body);
-
-    return template(article);
+  complaintsView.renderWithHandlebars = function(templateid, data) {
+    var template = Handlebars.compile($(templateid).text());
+    return template(data);
   };
 
 
@@ -42,7 +33,7 @@
           total_complaints: 888,//Complaint.sumOfComplaints(returnedResults),
           open_claims: '100%'//Complaint.openComplaintsRatio(returnedResults),
         };
-
+        complaintsView.renderWithHandlebars('#renderWithHandlebars', viewObject);
       }
     });
     //eventhandeler for search form. calls methods based on query and renders results.
@@ -50,14 +41,12 @@
 
 
 
-  complaintsView.render = function(){
+  complaintsView.renderIndexPage = function(){
     complaintsView.autoCompleteName();
     complaintsView.autoCompleteCategory();
   };
 
-
-
-  Complaint.updateData(complaintsView.render);
+  Complaint.updateData(complaintsView.renderIndexPage);
 
   module.complaintsView = complaintsView;
 })(window);
