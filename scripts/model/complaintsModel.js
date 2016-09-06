@@ -41,11 +41,10 @@
     return categoryArray;
   };
 
-  Complaint.openClaims = function() {
+  Complaint.openClaims = function(array) {
     // return percentage of open claims of specific business location
     var totalOpenArray = [];
-    Complaint.allComplaints.map(function(ele) {
-      // console.log(ele);
+    array.map(function(ele) {
       if (ele.status !== 'Closed') {
         totalOpenArray.push(ele);
       }
@@ -53,7 +52,6 @@
     console.log('total open status claims: ' + totalOpenArray.length);
     return totalOpenArray.length;
   };
-    // Complaint.openClaims();
 
   Complaint.numOfLocs = function() {
   //return number of locations of business that matched searched name
