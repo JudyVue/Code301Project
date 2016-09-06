@@ -40,22 +40,24 @@
     <main>
       <section id="home" class="tab-content">
         <article id="search">
-          <form id="search-form">
+          <form id="search-form" action="/results">
             <label>
               Type in a Business Name
+              <input id="business_name" type="search">
             </label>
-            <input id="business_name" type="search">
             </input>
             <label>
               Type in a Business Category
+              <input id="category_name">
+              </input>
             </label>
-            <input id="category_name">
-            </input>
-            <button type="submit">Search</button>
+            <button id="search-button" type="submit">Search</button>
           </form>
+
         </article>
         <article id="results">
           <div id="results-by-Name">
+            <h4>Company Name</h4>
 
           </div>
           <div id="results-by-Category">
