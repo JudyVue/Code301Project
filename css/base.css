@@ -1,7 +1,45 @@
+
+/*base styles*/
+body {
+
+}
+
 section {
   outline: dotted 5px orange;
 }
 
 input {
   display: block;
+}
+
+/*text styles*/
+h1 {
+
+}
+
+h2 {
+
+}
+
+h3 {
+
+}
+
+h4 {
+
+}
+
+p {
+
+}
+
+
+/* link styles */
+
+a {
+
+}
+
+a:hover {
+
 }
