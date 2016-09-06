@@ -16,7 +16,7 @@
           <li>Complaints Status: there are {{openClaims}} open complaints.</li>
         </ul>
     </script>
-    <script id="" type="text/jx-handlebars-table">
+    <script id="" type="text/x-handlebars-table">
       <h4>You searched for: {{businesscategory}} </h4>
         <ul class="meta-results">
           <li>Total Businesses: {{returnedResults.length}}</li>
@@ -87,16 +87,18 @@
     <script src="vendor/scripts/page.js"></script>
     <script src="vendor/scripts/webdb.js"></script>
 
+    <!-- model script -->
+    <script src="scripts/model/complaintsModel.js"></script>
+
+    <!-- view script -->
+    <script src="scripts/view/complaintsView.js"></script>
+
     <!-- controller scripts -->
     <script src="scripts/controller/homeController.js"></script>
     <script src="scripts/controller/resultsController.js"></script>
     <script src="scripts/controller/aboutController.js"></script>
     <script src="scripts/controller/routes.js"></script>
 
-    <!-- model script -->
-    <script src="scripts/model/complaintsModel.js"></script>
 
-    <!-- view script -->
-    <script src="scripts/view/complaintsView.js"></script>
   </body>
 </html>
