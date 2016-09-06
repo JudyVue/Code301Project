@@ -32,10 +32,19 @@
   complaintsView.getQuery = function(callback){
     $('#search-form').on('submit', function(event){
       event.preventDefault();
-      if($('#business_name').val()){
+      if($('#business_name').val() && $('#category_name').val()){
+        alert('You can only search either by business name or by category');
+      }
+      else if($('#business_name').val()){
         var query = $('#business_name').val();
-        console.log('query = ' + query);
         Complaint.searchByName(query, callback);
+      }
+      else if ($('#category_name').val()) {
+        var query = $('#category_name').val();
+        Complaint.searchByName(query, callback);
+      }
+      else{
+        alert('Why are you trying to search nothing?');
       }
     });
   };
