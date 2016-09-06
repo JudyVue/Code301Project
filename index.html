@@ -4,31 +4,32 @@
     <meta charset="utf-8">
     <title>Code 301 Project</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/layout.css">
     <link rel="stylesheet" href="css/module.css">
     <link rel="stylesheet" type="text/css" href="/vendor/style/jquery-ui.structure.css">
     <script id="company-name-template" type="text/x-handlebars-table">
-      <!-- <h4 id="{{business}}"class="company-name">{{business}}</h4> -->
-      <ul class="meta-results">
-        <li>Your search returned {{totalResults}}</li>
-        <li>Open Claims %: {{openClaims}}</li>
-      </ul>
+      <h4 id="{{business}}"class="company-name">{{business}}</h4>
+        <ul class="meta-results">
+          <li>Your search returned: {{totalResults}} complaints.</li>
+          <li>Complaints Status: there are {{openClaims}} open complaints.</li>
+        </ul>
     </script>
-    <script id="category-template" type="text/x-handlebars-table">
-      <h4>You searched for: {{businesscategory}}</h4>
-      <ul class="meta-results">
-        <li>Total Results: {{returnedResults.length}}</li>
-      <ul class="all-results">
-      </ul>
-      </ul>
+    <script id="" type="text/jx-handlebars-table">
+      <h4>You searched for: {{businesscategory}} </h4>
+        <ul class="meta-results">
+          <li>Total Businesses: {{returnedResults.length}}</li>
+        </ul>
+        <ul class="all-results">
+        </ul>
     </script>
   </head>
 
   <body>
     <header>
       <nav id="navigation">
-        <h1>Washington Attorney General Complaints(working title)</h1>
+        <h1>Business Complaint Finder</h1>
           <ul>
             <li><a href="/">Home</a></li>
             <li><a href="/about">About</a></li>
@@ -39,12 +40,12 @@
     <main>
       <section id="home" class="tab-content">
         <article id="search">
-          <form id="search-form">
+          <form id="search-form" action="/results">
             <label>
               Type in a Business Name
               <input id="business_name" type="search">
+              </input>
             </label>
-            </input>
             <label>
               Type in a Business Category
               <input id="category_name">
@@ -52,17 +53,13 @@
             </label>
             <button id="search-button" type="submit">Search</button>
           </form>
-
         </article>
         <article id="results">
           <div id="results-by-Name">
             <h4>Company Name</h4>
-
           </div>
           <div id="results-by-Category">
-
           </div>
-
         </article>
       </section>
 
@@ -77,8 +74,9 @@
     </main>
 
     <footer>
-      DISCLAIMER FOOTER:  The existence of a complaint is not evidence of wrongdoing.
+      DISCLAIMER: The existence of a complaint is not evidence of wrongdoing.
     </footer>
+
     <!-- vendor scripts -->
     <script src="vendor/scripts/handlebars.js"></script>
     <script src="vendor/scripts/highlight.pack.js"></script>
@@ -89,19 +87,16 @@
     <script src="vendor/scripts/page.js"></script>
     <script src="vendor/scripts/webdb.js"></script>
 
-
-
-    <!-- model view -->
-    <script src="scripts/model/complaintsModel.js"></script>
-
-    <!-- view script -->
-    <script src="scripts/view/complaintsView.js"></script>
-
-
     <!-- controller scripts -->
     <script src="scripts/controller/homeController.js"></script>
     <script src="scripts/controller/resultsController.js"></script>
     <script src="scripts/controller/aboutController.js"></script>
     <script src="scripts/controller/routes.js"></script>
+
+    <!-- model script -->
+    <script src="scripts/model/complaintsModel.js"></script>
+
+    <!-- view script -->
+    <script src="scripts/view/complaintsView.js"></script>
   </body>
 </html>

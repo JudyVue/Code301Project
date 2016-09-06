@@ -1,0 +1,30 @@
+
+header {
+  width: 95%;
+  margin: 0 auto;
+}
+
+main {
+  width: 95%;
+  margin: 0 auto;
+}
+
+footer {
+  outline: 1px dashed yellow;
+  width: 95%;
+  margin: 0 auto;
+}
+
+
+
+
+
+
+
+@media only screen and (min-width: 320px) {
+
+}
+
+@media only screen and (min-width: 675px) {
+
+}

@@ -1,0 +1,24 @@
+
+section {
+  outline: dotted 3px orange;
+}
+
+header {
+  outline: dotted 3px black;
+}
+
+div {
+  outline: dotted 3px green;
+}
+
+#navigation {
+  margin-bottom: 10px;
+}
+
+#navigation ul li {
+  display: inline-block;
+  border: 1px solid #6186CC;
+  background-color: #ABCC61;
+  padding: 2px;
+  margin: 2px;
+}
