@@ -4,23 +4,24 @@
     <meta charset="utf-8">
     <title>Code 301 Project</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/layout.css">
     <link rel="stylesheet" href="css/module.css">
     <link rel="stylesheet" type="text/css" href="/vendor/style/jquery-ui.structure.css">
     <script id="company-name-template" type="text/x-handlebars-table">
-      <!-- <h4 id="{{business}}"class="company-name">{{business}}</h4> -->
+      <h4 id="{{business}}"class="company-name">{{business}}</h4>
       <ul class="meta-results">
-        <li>Your search returned {{totalResults}}</li>
+        <li>Your search returned {{totalResults}} complaints.</li>
         <li>Open Claims %: {{openClaims}}</li>
       </ul>
     </script>
     <script id="" type="text/jx-handlebars-table">
       <h4>You searched for: {{businesscategory}}</h4>
       <ul class="meta-results">
-        <li>Total Results: {{returnedResults.length}}</li>
-      <ul class="all-results">
+        <li>Total Businesses: {{returnedResults.length}}</li>
       </ul>
+      <ul class="all-results">
       </ul>
     </script>
   </head>
@@ -77,7 +78,7 @@
     </main>
 
     <footer>
-      DISCLAIMER FOOTER:  The existence of a complaint is not evidence of wrongdoing.
+      DISCLAIMER: The existence of a complaint is not evidence of wrongdoing.
     </footer>
     <!-- vendor scripts -->
     <script src="vendor/scripts/handlebars.js"></script>
