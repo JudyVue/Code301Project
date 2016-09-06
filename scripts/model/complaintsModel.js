@@ -58,7 +58,7 @@
   };
 
 
-  Complaint.numOfBusiness  = function() {
+  Complaint.numOfBusiness = function() {
   // return num of business within a category
   };
 
@@ -132,7 +132,7 @@
       console.log('Set up complaints table.');
     }
   );
-};
+  };
 
   Complaint.updateData = function(callback) {
     webDB.execute('SELECT * FROM complaints', function(rows) {
@@ -148,7 +148,7 @@
               Complaint.allComplaints.push(item);
             }
             else {
-              console.log('business name is unknown', item.business)
+              console.log('business name is unknown', item.business);
             }
           });
           callback();
