@@ -32,10 +32,22 @@
   complaintsView.getQuery = function(callback){
     $('#search-form').on('submit', function(event){
       event.preventDefault();
-      if($('#business_name').val()){
+      page('/results'); //sets url to results
+      if($('#business_name').val() && $('#category_name').val()){ //if they've entered both
+        alert('You can only search either by business name or by category');
+      }
+      //search by name
+      else if($('#business_name').val()){
         var query = $('#business_name').val();
-        console.log('query = ' + query);
         Complaint.searchByName(query, callback);
+      }
+      //search by
+      else if ($('#category_name').val()) {
+        var query = $('#category_name').val();
+        Complaint.searchByCategory(query, callback);
+      }
+      else{
+        alert('Why are you trying to search nothing?');
       }
     });
   };
@@ -54,13 +66,16 @@
 
 
 
-  complaintsView.renderIndexPage = function(){
+  complaintsView.index = function(){
+    $('#about').hide();
+    $('#results').children().children().remove();
+    $('#home').show();
     complaintsView.autoCompleteName();
     complaintsView.autoCompleteCategory();
     complaintsView.getQuery(complaintsView.returnSearch);
 
   };
-  Complaint.updateData(complaintsView.renderIndexPage);
+  // Complaint.updateData(complaintsView.renderIndexPage);
 
   module.complaintsView = complaintsView;
 })(window);
