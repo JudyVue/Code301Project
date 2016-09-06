@@ -29,11 +29,19 @@
 
   Complaint.loadAll = function(rows){
     //TODO: DONE Don't load if buisness name is unknown.
-    Complaint.allComplaints = rows.map(function(ele){
-      if (ele.business !== 'Unknown') {
-        return new Complaint(ele);
-      }
-    });
+    Complaint.allComplaints = rows.reduce(function(acc, current){
+      if (current.business !== 'Unknown'){
+       acc.push(new Complaint(current));
+     }
+      return acc;
+   },[])
+  };
+
+  Complaint.dropTable = function(){
+    webDB.execute(
+      'DROP TABLE complaints;'
+    );
+    console.log('dropped table');
   };
 
   Complaint.prototype.insertRecord = function(){
@@ -97,7 +105,7 @@
   Complaint.updateData = function(callback) {
     webDB.execute('SELECT * FROM complaints', function(rows) {
       if (!rows.length){
-        $.get('https://data.wa.gov/resource/fuxx-yeeu.json?&$$app_token=fi6PA6s5JICb5OJ323FV5nYsy')
+        $.get('https://data.wa.gov/resource/fuxx-yeeu.json?&$$app_token=fi6PA6s5JICb5OJ323FV5nYsy&$limit=50')
         .done(function(data) {
           data.forEach(function(item){
             //TODO: DONE load into table here.
