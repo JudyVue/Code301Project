@@ -18,8 +18,10 @@
     return allunique;
   };
 
+
   Complaint.nameArray = [];
   Complaint.searchByName = function(query, callback){
+
     webDB.execute('SELECT * FROM complaints WHERE business = "' + query + '"' + ';', function(rows){
       rows.forEach(function(ele){
         var complaint = new Complaint(ele);
@@ -37,6 +39,29 @@
       });
     });
     return categoryArray;
+  };
+
+  Complaint.openClaims = function() {
+    // return percentage of open claims of specific business location
+    var totalOpenArray = [];
+    Complaint.allComplaints.map(function(ele) {
+      // console.log(ele);
+      if (ele.status !== 'Closed') {
+        totalOpenArray.push(ele);
+      }
+    });
+    console.log('total open status claims: ' + totalOpenArray.length);
+    return totalOpenArray.length;
+  };
+    // Complaint.openClaims();
+
+  Complaint.numOfLocs = function() {
+  //return number of locations of business that matched searched name
+  };
+
+
+  Complaint.numOfBusiness  = function() {
+  // return num of business within a category
   };
 
 
@@ -114,7 +139,7 @@
   Complaint.updateData = function(callback) {
     webDB.execute('SELECT * FROM complaints', function(rows) {
       if (!rows.length){
-        $.get('https://data.wa.gov/resource/fuxx-yeeu.json?&$$app_token=fi6PA6s5JICb5OJ323FV5nYsy&$limit=50')
+        $.get('https://data.wa.gov/resource/fuxx-yeeu.json?&$$app_token=fi6PA6s5JICb5OJ323FV5nYsy&$limit=10')
         .done(function(data) {
           data.forEach(function(item){
             //TODO: DONE load into table here.
