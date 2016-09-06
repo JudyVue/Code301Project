@@ -1,11 +1,9 @@
 
 /*base styles*/
 body {
-
-}
-
-section {
-  outline: dotted 5px orange;
+  font-family: sans-serif;
+  background-color: #D2D6FF;
+  margin: 0px auto;
 }
 
 input {
@@ -14,32 +12,40 @@ input {
 
 /*text styles*/
 h1 {
-
+  color: #759925;
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  letter-spacing: .15em;
 }
 
 h2 {
-
+  font-size: 1.25rem;
+  margin-bottom: 5px;
 }
 
 h3 {
+  font-size: 1rem;
+  margin-bottom: 5px;
 
 }
 
 h4 {
+  font-size: 1rem;
+  margin-bottom: 5px;
 
 }
 
 p {
-
+  margin-bottom: 5px;
 }
 
 
 /* link styles */
 
 a {
-
+  text-decoration: none;
 }
 
 a:hover {
-
+  background-color: #FFF392;
 }
