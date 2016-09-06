@@ -8,7 +8,14 @@
     var template = Handlebars.compile($(templateid).text());
     return template(data);
   };
+  // var viewObject = {
+  //   totalResults: 7,
+  //   openClaims: '100%'//Complaint.openClaims(returnedResults),
+  // };
 
+  // var renderedResult = complaintsView.renderWithHandlebars('#company-name-template', viewObject);
+  //
+  // $('#results-by-Name').append(renderedResult);
 
   complaintsView.autoCompleteName = function() {
     $('#business_name').autocomplete({
@@ -22,31 +29,35 @@
     });
   };
 
-  complaintsView.getQuery = function(){
-    console.log('setting up search form');
+  complaintsView.getQuery = function(callback){
     $('#search-form').on('submit', function(event){
       event.preventDefault();
       if($('#business_name').val()){
-        console.log('form summitted, ', $('#business_name').val());
         var query = $('#business_name').val();
-        // var returnedResults = searchByName(query);
-        var returnedResults = Complaint.allComplaints;
-        var viewObject = {
-          total_results: returnedResults.length,
-          total_complaints: 888,//Complaint.sumOfComplaints(returnedResults),
-          open_claims: '100%'//Complaint.openClaims(returnedResults),
-        };
-        $('#results-by-Name').append(complaintsView.renderWithHandlebars('#renderWithHandlebars', viewObject));
+        console.log('query = ' + query);
+        Complaint.searchByName(query, callback);
       }
     });
-    //eventhandeler for search form. calls methods based on query and renders results.
   };
+
+  complaintsView.returnSearch = function(){
+    console.log('Retrieved this array based on query ' + Complaint.nameArray.length);
+    var viewObject = {
+      totalResults: Complaint.nameArray.length,
+      openClaims: '100%'//Complaint.openClaims(returnedResults),
+    };
+    var renderedResult = complaintsView.renderWithHandlebars('#company-name-template', viewObject);
+    $('#results-by-Name').append(renderedResult);
+    var $paragraph = $('<p>').text('test text');
+    $('#results-by-Name').append($paragraph);
+  };
+
 
 
   complaintsView.renderIndexPage = function(){
     complaintsView.autoCompleteName();
     complaintsView.autoCompleteCategory();
-    complaintsView.getQuery();
+    complaintsView.getQuery(complaintsView.returnSearch);
 
   };
   Complaint.updateData(complaintsView.renderIndexPage);

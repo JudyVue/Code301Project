@@ -18,15 +18,15 @@
     return allunique;
   };
 
-  Complaint.searchByName = function(query){
-    var nameArray = [];
+  Complaint.nameArray = [];
+  Complaint.searchByName = function(query, callback){
     webDB.execute('SELECT * FROM complaints WHERE business = "' + query + '"' + ';', function(rows){
       rows.forEach(function(ele){
-        nameArray.push(ele);
+        var complaint = new Complaint(ele);
+        Complaint.nameArray.push(complaint);
       });
-      console.log(nameArray, 'is the returned array when user searches by name');
+      callback();
     });
-    return nameArray;
   };
 
   Complaint.searchByCategory = function(query){
@@ -35,14 +35,12 @@
       rows.forEach(function(ele){
         categoryArray.push(ele);
       });
-      console.log(categoryArray, 'is the returned array when user searches by biz category');
     });
     return categoryArray;
   };
 
 
   Complaint.loadAll = function(rows){
-    //TODO: DONE Don't load if buisness name is unknown.
     Complaint.allComplaints = rows.map(function(ele){
       return new Complaint(ele);
     });
@@ -52,7 +50,6 @@
     webDB.execute(
       'DROP TABLE complaints;'
     );
-    console.log('dropped table');
   };
 
   Complaint.prototype.insertRecord = function(){
@@ -123,7 +120,6 @@
             //TODO: DONE load into table here.
             var business = item.business.trim();
             if (business !== 'Unknown') {
-              console.log('business name is not unknown', item.business, typeof(item.business));
               var complaint = new Complaint(item);
               complaint.insertRecord();
               Complaint.allComplaints.push(item);
