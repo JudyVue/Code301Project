@@ -21,11 +21,25 @@
   Complaint.searchByCategory = function(query){
 //select by category where businesscategory matches searched category
   };
+    Complaint.
 
   Complaint.searchByName = function(query){
-    //select by name where business matches searched name
+  //select by name where business matches searched name
 
   };
+
+  Complaint.numOfLocs = function() {
+  //return number of locations of business that matched searched name
+  };
+
+  Complaint.openClaims = function() {
+  // return percentage of open claims of specific busness location
+  };
+
+  Complaint.numOfBusiness  = function() {
+  // return num of business within a category
+  };
+
 
   Complaint.loadAll = function(rows){
     //TODO: DONE Don't load if buisness name is unknown.
