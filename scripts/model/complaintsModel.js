@@ -30,10 +30,15 @@
   Complaint.loadAll = function(rows){
     //TODO: DONE Don't load if buisness name is unknown.
     Complaint.allComplaints = rows.map(function(ele){
-      if (ele.business !== 'Unknown') {
-        return new Complaint(ele);
-      }
-    });
+      return new Complaint(ele);
+   });
+  };
+
+  Complaint.dropTable = function(){
+    webDB.execute(
+      'DROP TABLE complaints;'
+    );
+    console.log('dropped table');
   };
 
   Complaint.prototype.insertRecord = function(){
@@ -92,7 +97,8 @@
     function(){
       console.log('Set up complaints table.');
     }
-  );};
+  );
+};
 
   Complaint.updateData = function(callback) {
     webDB.execute('SELECT * FROM complaints', function(rows) {
@@ -101,9 +107,16 @@
         .done(function(data) {
           data.forEach(function(item){
             //TODO: DONE load into table here.
-            var complaint = new Complaint(item);
-            complaint.insertRecord();
-            Complaint.allComplaints.push(item);
+            var business = item.business.trim();
+            if (business !== 'Unknown') {
+              console.log('business name is not unknown', item.business, typeof(item.business));
+              var complaint = new Complaint(item);
+              complaint.insertRecord();
+              Complaint.allComplaints.push(item);
+            }
+            else {
+              console.log('business name is unknown', item.business)
+            }
           });
           callback();
         });
