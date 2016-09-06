@@ -8,6 +8,22 @@
     <link rel="stylesheet" href="css/layout.css">
     <link rel="stylesheet" href="css/module.css">
     <link rel="stylesheet" type="text/css" href="/vendor/style/jquery-ui.structure.css">
+    <script id="company-name-template" type="text/x-handlebars-table">
+      <h4 id="{{business}}"class="company-name">{{business}}</h4>
+      <ul class="meta-results">
+        <li>Your search returned {{total_results}}</li>
+        <li>Total complaints: {{total_complaints}}</li>
+        <li>Open Claims %: {{open_claims}}</li>
+      </ul>
+    </script>
+    <script id="" type="text/jx-handlebars-table">
+      <h4>You searched for: {{businesscategory}}</h4>
+      <ul class="meta-results">
+        <li>Total Results: {{returnedResults.length}}</li>
+      <ul class="all-results">
+      </ul>
+      </ul>
+    </script>
   </head>
 
   <body>
@@ -30,23 +46,22 @@
             </label>
             <input id="business_name" type="search">
             </input>
-            <button type="submit">Submit</button>
             <label>
               Type in a Business Category
             </label>
             <input id="category_name">
             </input>
-            <button type="submit">Submit</button>
+            <button type="submit">Search</button>
           </form>
         </article>
         <article id="results">
-          <h1>Search Results section is here</h1>
-          <ul class="results-by-Name">
+          <div id="results-by-Name">
 
-          </ul>
-          <ul class="results-by-Category">
+          </div>
+          <div id="results-by-Category">
 
-          </ul>
+          </div>
+
         </article>
       </section>
 

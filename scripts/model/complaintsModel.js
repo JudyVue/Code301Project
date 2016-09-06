@@ -18,14 +18,28 @@
     return allunique;
   };
 
-  Complaint.searchByCategory = function(query){
-//select by category where businesscategory matches searched category
-  };
-    Complaint.
+
 
   Complaint.searchByName = function(query){
-  //select by name where business matches searched name
+    var nameArray = [];
+    webDB.execute('SELECT * FROM complaints WHERE business = "' + query + '"' + ';', function(rows){
+      rows.forEach(function(ele){
+        nameArray.push(ele);
+      });
+      console.log(nameArray, 'is the returned array when user searches by name');
+    });
+    return nameArray;
+  };
 
+  Complaint.searchByCategory = function(query){
+    var categoryArray = [];
+    webDB.execute('SELECT * FROM complaints WHERE businesscategory = "' + query + '"' + ';', function(rows){
+      rows.forEach(function(ele){
+        categoryArray.push(ele);
+      });
+      console.log(categoryArray, 'is the returned array when user searches by biz category');
+    });
+    return categoryArray;
   };
 
   Complaint.numOfLocs = function() {
@@ -45,7 +59,7 @@
     //TODO: DONE Don't load if buisness name is unknown.
     Complaint.allComplaints = rows.map(function(ele){
       return new Complaint(ele);
-   });
+    });
   };
 
   Complaint.dropTable = function(){
