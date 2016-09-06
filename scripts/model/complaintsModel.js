@@ -18,15 +18,10 @@
     return allunique;
   };
 
-<<<<<<< HEAD
 
-
-  Complaint.searchByName = function(query){
-    var nameArray = [];
-=======
   Complaint.nameArray = [];
   Complaint.searchByName = function(query, callback){
->>>>>>> c3c9b7271fb469c72f6d9c44ece838ad91942961
+
     webDB.execute('SELECT * FROM complaints WHERE business = "' + query + '"' + ';', function(rows){
       rows.forEach(function(ele){
         var complaint = new Complaint(ele);
