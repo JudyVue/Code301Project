@@ -26,8 +26,8 @@
     console.log('setting up search form');
     $('#search-form').on('submit', function(event){
       event.preventDefault();
-      console.log('form summitted, ', $('#business_name').val());
       if($('#business_name').val()){
+        console.log('form summitted, ', $('#business_name').val());
         var query = $('#business_name').val();
         // var returnedResults = searchByName(query);
         var returnedResults = Complaint.allComplaints;
