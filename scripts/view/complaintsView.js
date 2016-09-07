@@ -8,14 +8,6 @@
     var template = Handlebars.compile($(templateid).text());
     return template(data);
   };
-  // var viewObject = {
-  //   totalResults: 7,
-  //   openClaims: '100%'//Complaint.openClaims(returnedResults),
-  // };
-
-  // var renderedResult = complaintsView.renderWithHandlebars('#company-name-template', viewObject);
-  //
-  // $('#results-by-Name').append(renderedResult);
 
   complaintsView.autoCompleteName = function() {
     $('#business_name').autocomplete({
@@ -32,19 +24,23 @@
   complaintsView.getQuery = function(callback){
     $('#search-form').on('submit', function(event){
       event.preventDefault();
-      page('/results'); //sets url to results
-      if($('#business_name').val() && $('#category_name').val()){ //if they've entered both
+      // page('/result'); //sets url to results
+
+      //if they've entered both
+      if($('#business_name').val() && $('#category_name').val()){
         alert('You can only search either by business name or by category');
       }
       //search by name
       else if($('#business_name').val()){
         var query = $('#business_name').val();
-        Complaint.searchByName(query, callback);
+        page('/result/' + $('#business_name').val().replace(/\W+/g, '+'));
+        // Complaint.searchByName(query, callback);
       }
-      //search by
+      //search by category
       else if ($('#category_name').val()) {
         var query = $('#category_name').val();
-        Complaint.searchByCategory(query, callback);
+        page('/category/' + $('#category_name').val().replace(/\W+/g, '+'));
+        // Complaint.searchByCategory(query, callback);
       }
       else{
         alert('Why are you trying to search nothing?');
@@ -52,28 +48,29 @@
     });
   };
 
-  complaintsView.returnSearch = function(){
-    console.log('Retrieved this array based on query ' + Complaint.nameArray.length);
-    var returnedResults = Complaint.nameArray;
+  complaintsView.returnSearch = function(complaints){
+    console.log('Retrieved this array based on query ' +
+    complaints);
+    var returnedResults = complaints;
     var viewObject = {
       totalResults: returnedResults.length,
-      openClaims: (Complaint.openClaims(returnedResults)/returnedResults.length)*100,
+      openClaims: (
+        Complaint.openClaims(returnedResults)/returnedResults.length)*100,
     };
-    var renderedResult = complaintsView.renderWithHandlebars('#company-name-template', viewObject);
+    var renderedResult = complaintsView
+    .renderWithHandlebars('#company-name-template', viewObject);
     $('#results-by-Name').append(renderedResult);
-    var $paragraph = $('<p>').text('test text');
-    $('#results-by-Name').append($paragraph);
   };
 
 
-
-  complaintsView.index = function(){
+  complaintsView.index = function(callback){
     $('#about').hide();
     $('#results').children().children().remove();
     $('#home').show();
     complaintsView.autoCompleteName();
     complaintsView.autoCompleteCategory();
-    complaintsView.getQuery(complaintsView.returnSearch);
+    complaintsView.getQuery();
+    // callback;
 
   };
   // Complaint.updateData(complaintsView.renderIndexPage);
