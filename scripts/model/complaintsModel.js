@@ -6,9 +6,9 @@
     }, this);
   }
 
+  // Complaint.nameArray = [];
   Complaint.allComplaints = [];
-  Complaint.nameArray = [];
-  Complaint.categoryArray = [];
+
 
   Complaint.selectUniqueInColumn = function(column) {
     var allunique = [];
@@ -22,25 +22,26 @@
 
 
   Complaint.searchByName = function(query, callback){
-    Complaint.nameArray = [];
-    webDB.execute('SELECT * FROM complaints WHERE business = "' + query + '"' + ';', function(rows){
-      rows.forEach(function(ele){
-        var complaint = new Complaint(ele);
-        Complaint.nameArray.push(complaint);
-      });
-      callback();
-    });
-  };
+     var nameArray = [];
+     webDB.execute('SELECT * FROM complaints WHERE business = "' + query + '"' + ';', function(rows){
+       rows.forEach(function(ele){
+         var complaint = new Complaint(ele);
+         nameArray.push(complaint);
+       });
+       callback(nameArray);
+     });
+   };
 
-  Complaint.searchByCategory = function(query, callback){
-    webDB.execute('SELECT * FROM complaints WHERE businesscategory = "' + query + '"' + ';', function(rows){
-      rows.forEach(function(ele){
-        var complaint = new Complaint(ele);
-        Complaint.categoryArray.push(complaint);
-      });
-    });
-    callback();
-  };
+   Complaint.searchByCategory = function(query, callback){
+     var categoryArray = [];
+     webDB.execute('SELECT * FROM complaints WHERE businesscategory = "' + query + '"' + ';', function(rows){
+       rows.forEach(function(ele){
+         var complaint = new Complaint(ele);
+         categoryArray.push(complaint);
+       });
+       callback(categoryArray);
+     });
+   };
 
    Complaint.openClaims = function(array) {
      // return percentage of open claims of specific business location
