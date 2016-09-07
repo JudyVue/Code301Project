@@ -54,9 +54,10 @@
 
   complaintsView.returnSearch = function(){
     console.log('Retrieved this array based on query ' + Complaint.nameArray.length);
+    var returnedResults = Complaint.nameArray;
     var viewObject = {
-      totalResults: Complaint.nameArray.length,
-      openClaims: '100%'//Complaint.openClaims(returnedResults),
+      totalResults: returnedResults.length,
+      openClaims: (Complaint.openClaims(returnedResults)/returnedResults.length)*100,
     };
     var renderedResult = complaintsView.renderWithHandlebars('#company-name-template', viewObject);
     $('#results-by-Name').append(renderedResult);

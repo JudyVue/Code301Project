@@ -21,7 +21,6 @@
 
   Complaint.nameArray = [];
   Complaint.searchByName = function(query, callback){
-
     webDB.execute('SELECT * FROM complaints WHERE business = "' + query + '"' + ';', function(rows){
       rows.forEach(function(ele){
         var complaint = new Complaint(ele);
