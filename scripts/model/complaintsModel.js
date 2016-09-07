@@ -6,7 +6,7 @@
     }, this);
   }
 
-  Complaint.nameArray = [];
+  // Complaint.nameArray = [];
   Complaint.allComplaints = [];
 
   Complaint.selectUniqueInColumn = function(column) {
@@ -21,13 +21,13 @@
 
 
   Complaint.searchByName = function(query, callback){
-    Complaint.nameArray = [];
+    var nameArray = [];
     webDB.execute('SELECT * FROM complaints WHERE business = "' + query + '"' + ';', function(rows){
       rows.forEach(function(ele){
         var complaint = new Complaint(ele);
-        Complaint.nameArray.push(complaint);
+        nameArray.push(complaint);
       });
-      callback();
+      callback(nameArray);
     });
   };
 
@@ -151,7 +151,7 @@
             if (business !== 'Unknown') {
               var complaint = new Complaint(item);
               complaint.insertRecord();
-              Complaint.allComplaints.push(item);
+              Complaint.allComplaints.push(complaint);
             }
             else {
               console.log('business name is unknown', item.business);

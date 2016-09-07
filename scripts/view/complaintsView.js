@@ -51,14 +51,15 @@
   complaintsView.returnSearch = function(complaints){
     console.log('Retrieved this array based on query ' +
     complaints);
-    var returnedResults = complaints;
+    $('#business_name').val('');
     var viewObject = {
-      totalResults: returnedResults.length,
+      business: complaints[0].business,
+      totalResults: complaints.length,
       openClaims: (
-        Complaint.openClaims(returnedResults)/returnedResults.length)*100,
+        Complaint.openClaims(complaints)/complaints.length)*100,
     };
-    var renderedResult = complaintsView
-    .renderWithHandlebars('#company-name-template', viewObject);
+    var renderedResult = complaintsView.renderWithHandlebars(
+      '#company-name-template', viewObject);
     $('#results-by-Name').append(renderedResult);
   };
 

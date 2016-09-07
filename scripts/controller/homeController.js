@@ -27,8 +27,9 @@
   };
 
   homeController.loadByName = function(ctx, next) {
-    var complaintsData = function() {
-      ctx.complaints = Complaint.nameArray;
+    ctx.complaints = [];
+    var complaintsData = function(array) {
+      ctx.complaints = array;
       next();
     };
     Complaint.searchByName(
