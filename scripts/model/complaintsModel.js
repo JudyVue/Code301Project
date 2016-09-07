@@ -32,14 +32,15 @@
     });
   };
 
-  Complaint.searchByCategory = function(query){
+  Complaint.searchByCategory = function(query, callback){
+    var categoryArray = [];
     webDB.execute('SELECT * FROM complaints WHERE businesscategory = "' + query + '"' + ';', function(rows){
       rows.forEach(function(ele){
         var complaint = new Complaint(ele);
         categoryArray.push(complaint);
       });
+      callback(categoryArray);
     });
-    return categoryArray;
   };
 
   Complaint.openClaims = function(array) {
