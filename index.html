@@ -11,12 +11,17 @@
     <link rel="stylesheet" type="text/css" href="/vendor/style/jquery-ui.structure.css">
 
     <script id="company-name-template" type="text/x-handlebars-template">
-      <h4 id="{{business}}"class="company-name">{{business}}</h4>
+      <h4 id="{{business}}" class="company-name">{{business}}</h4>
+        <ul class="address">
+          <li>{{street}}</li>
+          <li>{{city}} {{state}} {{zip}}</li>
+        </ul>
         <ul class="meta-results">
-          <li>Your search returned: {{totalResults}} complaints.</li>
-          <li>Complaints Status: there are {{openClaims}} open complaints.</li>
+          <li>There have been {{totalResults}} complaint(s) filed against {{business}}.</li>
+          <li>{{openClaims}}% of the complaints are open (unresolved).</li>
         </ul>
     </script>
+
     <script id="category-template" type="text/x-handlebars-template">
       <h4>You searched for: {{businesscategory}} </h4>
         <ul class="meta-results">
