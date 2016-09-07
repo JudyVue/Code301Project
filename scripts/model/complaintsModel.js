@@ -9,7 +9,6 @@
   // Complaint.nameArray = [];
   Complaint.allComplaints = [];
 
-
   Complaint.selectUniqueInColumn = function(column) {
     var allunique = [];
     webDB.execute('SELECT DISTINCT ' + column + ' FROM complaints ORDER BY ' + column + ' ASC;', function(rows){
@@ -19,7 +18,6 @@
     });
     return allunique;
   };
-
 
   Complaint.searchByName = function(query, callback){
     var nameArray = [];
@@ -54,12 +52,12 @@
     return totalOpenArray.length;
   };
 
-  Complaint.numOfBusiness = function() {
+  Complaint.numOfBusiness = function(categoryArray) {
      // return num of complaints with unique business name (without dupes) matching a category search
     var uniqueCategoryArray = [];
-    Complaint.categoryArray.map(function(ele){
-      uniqueCategoryArray = Complaint.categoryArray.filter(function(ele, index) {
-        return Complaint.categoryArray.indexOf(ele) === index;
+    categoryArray.map(function(ele){
+      uniqueCategoryArray = categoryArray.filter(function(ele, index) {
+        return categoryArray.indexOf(ele) === index;
       });
     });
     console.log(uniqueCategoryArray);
