@@ -148,7 +148,7 @@
             if (business !== 'Unknown') {
               var complaint = new Complaint(item);
               complaint.insertRecord();
-              Complaint.allComplaints.push(item);
+              Complaint.allComplaints.push(complaint);
             }
             else {
               console.log('business name is unknown', item.business);
