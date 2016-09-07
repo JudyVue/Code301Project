@@ -49,10 +49,8 @@
   };
 
   complaintsView.returnSearch = function(complaints){
-    console.log('Retrieved this array based on query ' +
-    complaints);
+    $('#results').show();
     $('#business_name').val('');
-    console.log(typeof(complaints[0].businessstreetline1));
     var viewObject = {
       business: complaints[0].business,
       totalResults: complaints.length,
