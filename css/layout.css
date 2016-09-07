@@ -1,7 +1,15 @@
 
 header {
-  width: 95%;
+  width: 100%;
   margin: 0 auto;
+  padding-left: 20px;
+  background-color: #759925;
+
+}
+
+header h1{
+  color: white;
+
 }
 
 main {
@@ -9,14 +17,28 @@ main {
   margin: 0 auto;
 }
 
-footer {
-  outline: 1px dashed yellow;
-  width: 95%;
-  margin: 0 auto;
+
+
+#search-button{
+  display: inline-block;
+  font-size: .5em;
+  width: 40%;
 }
 
 
+footer {
+  outline: 1px dashed yellow;
+  width:100%;
+  font-size: .4em;
+  color: white;
+  text-align: center;
+  background-color: #759925;
+  position: fixed;
+  bottom: 0;
+  padding-top: 10px;
+  padding-bottom: 10px;
 
+}
 
 
 
