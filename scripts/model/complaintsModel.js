@@ -57,8 +57,8 @@
   Complaint.numOfBusiness = function() {
     // return num of complaints with same business name within a category
     Complaint.categoryArray.map(function(ele){
-  
     });
+  };
 
   Complaint.numOfLocs = function() {
   //return number of locations of business that matched searched name
