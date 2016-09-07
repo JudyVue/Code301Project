@@ -22,48 +22,61 @@
 
 
   Complaint.searchByName = function(query, callback){
-    var nameArray = [];
-    webDB.execute('SELECT * FROM complaints WHERE business = "' + query + '"' + ';', function(rows){
-      rows.forEach(function(ele){
-        var complaint = new Complaint(ele);
-        nameArray.push(complaint);
-      });
-      callback(nameArray);
-    });
-  };
+     var nameArray = [];
+     webDB.execute('SELECT * FROM complaints WHERE business = "' + query + '"' + ';', function(rows){
+       rows.forEach(function(ele){
+         var complaint = new Complaint(ele);
+         nameArray.push(complaint);
+       });
+       callback(nameArray);
+     });
+   };
 
-  Complaint.searchByCategory = function(query, callback){
-    var categoryArray = [];
-    webDB.execute('SELECT * FROM complaints WHERE businesscategory = "' + query + '"' + ';', function(rows){
-      rows.forEach(function(ele){
-        var complaint = new Complaint(ele);
-        categoryArray.push(complaint);
-      });
-      callback(categoryArray);
-    });
-  };
+   Complaint.searchByCategory = function(query, callback){
+     var categoryArray = [];
+     webDB.execute('SELECT * FROM complaints WHERE businesscategory = "' + query + '"' + ';', function(rows){
+       rows.forEach(function(ele){
+         var complaint = new Complaint(ele);
+         categoryArray.push(complaint);
+       });
+       callback(categoryArray);
+     });
+   };
 
-  Complaint.openClaims = function(array) {
-    // return percentage of open claims of specific business location
-    var totalOpenArray = [];
-    array.map(function(ele) {
-      if (ele.status !== 'Closed') {
-        totalOpenArray.push(ele);
+   Complaint.openClaims = function(array) {
+     // return percentage of open claims of specific business location
+     var totalOpenArray = [];
+     array.map(function(ele) {
+       if (ele.status !== 'Closed') {
+         totalOpenArray.push(ele);
+       }
+     });
+     return totalOpenArray.length;
+   };
+
+   Complaint.numOfBusiness = function() {
+     // return num of complaints with unique business name (without dupes) matching a category search
+     var uniqueCategoryArray = [];
+     Complaint.categoryArray.map(function(ele){
+       uniqueCategoryArray = Complaint.categoryArray.filter(function(ele, index) {
+         return Complaint.categoryArray.indexOf(ele) === index;
+       });
+     });
+     console.log(uniqueCategoryArray);
+   };
+
+  Complaint.getLocations = function(business) {
+  //return num of locations of business that matched searched business name
+    var locArray = [];
+    Complaint.allComplaints.map(function(ele) {
+      if (ele.business === business) {
+        if (locArray.indexOf(ele.businessstreetline1) < 0) {
+          locAarray.push(ele.businessstreetline1);
+        }
       }
     });
-    return totalOpenArray.length;
-  };
-
-
-  Complaint.numOfBusiness = function() {
-    // return num of complaints with same business name within a category
-    Complaint.categoryArray.map(function(ele){
-    });
-  };
-
-  Complaint.numOfLocs = function() {
-  //return number of locations of business that matched searched name
-
+    console.log(locArray);
+    return locArray;
   };
 
 
@@ -147,10 +160,10 @@
             //TODO: DONE load into table here.
             var business = item.business.trim();
             if (business !== 'Unknown') {
-              var complaint = new Complaint(item);
-              complaint.insertRecord();
-              Complaint.allComplaints.push(complaint);
-            }
+             var complaint = new Complaint(item);
+             complaint.insertRecord();
+             Complaint.allComplaints.push(complaint);
+           }
             else {
               console.log('business name is unknown', item.business);
             }
