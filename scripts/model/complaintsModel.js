@@ -6,6 +6,7 @@
     }, this);
   }
 
+  // Complaint.nameArray = [];
   Complaint.allComplaints = [];
 
 
