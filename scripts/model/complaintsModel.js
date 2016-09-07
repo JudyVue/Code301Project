@@ -6,6 +6,7 @@
     }, this);
   }
 
+  Complaint.nameArray = [];
   Complaint.allComplaints = [];
 
   Complaint.selectUniqueInColumn = function(column) {
@@ -19,9 +20,8 @@
   };
 
 
-  Complaint.nameArray = [];
   Complaint.searchByName = function(query, callback){
-
+    Complaint.nameArray = [];
     webDB.execute('SELECT * FROM complaints WHERE business = "' + query + '"' + ';', function(rows){
       rows.forEach(function(ele){
         var complaint = new Complaint(ele);
@@ -49,17 +49,23 @@
         totalOpenArray.push(ele);
       }
     });
-    console.log('total open status claims: ' + totalOpenArray.length);
     return totalOpenArray.length;
+  };
+
+
+  Complaint.numOfBusiness = function(query) {
+    // return num of business within a category
+    var matchingCategoryBusiness = [];
+    Complaint.allComplaints.map(function(ele){
+      if (ele.businesscategory === query){
+        console.log(el.businesscategory);
+      };
+    });
   };
 
   Complaint.numOfLocs = function() {
   //return number of locations of business that matched searched name
-  };
 
-
-  Complaint.numOfBusiness = function() {
-  // return num of business within a category
   };
 
 
@@ -137,7 +143,7 @@
   Complaint.updateData = function(callback) {
     webDB.execute('SELECT * FROM complaints', function(rows) {
       if (!rows.length){
-        $.get('https://data.wa.gov/resource/fuxx-yeeu.json?&$$app_token=fi6PA6s5JICb5OJ323FV5nYsy&$limit=10')
+        $.get('https://data.wa.gov/resource/fuxx-yeeu.json?&$$app_token=fi6PA6s5JICb5OJ323FV5nYsy&$limit=500')
         .done(function(data) {
           data.forEach(function(item){
             //TODO: DONE load into table here.
@@ -145,7 +151,7 @@
             if (business !== 'Unknown') {
               var complaint = new Complaint(item);
               complaint.insertRecord();
-              Complaint.allComplaints.push(complaint);
+              Complaint.allComplaints.push(item);
             }
             else {
               console.log('business name is unknown', item.business);
