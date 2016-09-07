@@ -12,7 +12,7 @@
 
   Complaint.selectUniqueInColumn = function(column) {
     var allunique = [];
-    webDB.execute('SELECT DISTINCT ' + column + ' FROM complaints;', function(rows){
+    webDB.execute('SELECT DISTINCT ' + column + ' FROM complaints ORDER BY ' + column + ' ASC;', function(rows){
       rows.forEach(function(ele){
         allunique.push(ele[column]);
       });
@@ -22,48 +22,48 @@
 
 
   Complaint.searchByName = function(query, callback){
-     var nameArray = [];
-     webDB.execute('SELECT * FROM complaints WHERE business = "' + query + '"' + ';', function(rows){
-       rows.forEach(function(ele){
-         var complaint = new Complaint(ele);
-         nameArray.push(complaint);
-       });
-       callback(nameArray);
-     });
-   };
+    var nameArray = [];
+    webDB.execute('SELECT * FROM complaints WHERE business = "' + query + '"' + ';', function(rows){
+      rows.forEach(function(ele){
+        var complaint = new Complaint(ele);
+        nameArray.push(complaint);
+      });
+      callback(nameArray);
+    });
+  };
 
-   Complaint.searchByCategory = function(query, callback){
-     var categoryArray = [];
-     webDB.execute('SELECT * FROM complaints WHERE businesscategory = "' + query + '"' + ';', function(rows){
-       rows.forEach(function(ele){
-         var complaint = new Complaint(ele);
-         categoryArray.push(complaint);
-       });
-       callback(categoryArray);
-     });
-   };
+  Complaint.searchByCategory = function(query, callback){
+    var categoryArray = [];
+    webDB.execute('SELECT * FROM complaints WHERE businesscategory = "' + query + '"' + ';', function(rows){
+      rows.forEach(function(ele){
+        var complaint = new Complaint(ele);
+        categoryArray.push(complaint);
+      });
+      callback(categoryArray);
+    });
+  };
 
-   Complaint.openClaims = function(array) {
-     // return percentage of open claims of specific business location
-     var totalOpenArray = [];
-     array.map(function(ele) {
-       if (ele.status !== 'Closed') {
-         totalOpenArray.push(ele);
-       }
-     });
-     return totalOpenArray.length;
-   };
+  Complaint.openClaims = function(array) {
+   // return percentage of open claims of specific business location
+    var totalOpenArray = [];
+    array.map(function(ele) {
+      if (ele.status !== 'Closed') {
+        totalOpenArray.push(ele);
+      }
+    });
+    return totalOpenArray.length;
+  };
 
-   Complaint.numOfBusiness = function() {
+  Complaint.numOfBusiness = function() {
      // return num of complaints with unique business name (without dupes) matching a category search
-     var uniqueCategoryArray = [];
-     Complaint.categoryArray.map(function(ele){
-       uniqueCategoryArray = Complaint.categoryArray.filter(function(ele, index) {
-         return Complaint.categoryArray.indexOf(ele) === index;
-       });
-     });
-     console.log(uniqueCategoryArray);
-   };
+    var uniqueCategoryArray = [];
+    Complaint.categoryArray.map(function(ele){
+      uniqueCategoryArray = Complaint.categoryArray.filter(function(ele, index) {
+        return Complaint.categoryArray.indexOf(ele) === index;
+      });
+    });
+    console.log(uniqueCategoryArray);
+  };
 
   Complaint.getLocations = function(business) {
   //return num of locations of business that matched searched business name
@@ -96,13 +96,13 @@
     webDB.execute(
       [
         {
-          'sql': 'INSERT INTO complaints (actualsavings, '+
-          'business, '+
-          'business_id, '+
-          'businesscategory, '+
-          'businesscity, '+
-          'businessstate, '+
-          'businessstreetline1, '+
+          'sql': 'INSERT INTO complaints (actualsavings, ' +
+          'business, ' +
+          'business_id, ' +
+          'businesscategory, ' +
+          'businesscity, ' +
+          'businessstate, ' +
+          'businessstreetline1, ' +
           'businesszip, ' +
           'estimatedsavings, ' +
           'geocode0, ' +
@@ -124,14 +124,14 @@
   Complaint.createTable = function(){
     webDB.execute(
       'CREATE TABLE IF NOT EXISTS complaints (' +
-        'id INTEGER PRIMARY KEY,'+
-        'actualsavings VARCHAR,'+
-        'business VARCHAR,'+
-        'business_id INTEGER,'+
-        'businesscategory VARCHAR,'+
-        'businesscity VARCHAR,'+
-        'businessstate VARCHAR,'+
-        'businessstreetline1 VARCHAR,'+
+        'id INTEGER PRIMARY KEY,' +
+        'actualsavings VARCHAR,' +
+        'business VARCHAR,' +
+        'business_id INTEGER,' +
+        'businesscategory VARCHAR,' +
+        'businesscity VARCHAR,' +
+        'businessstate VARCHAR,' +
+        'businessstreetline1 VARCHAR,' +
         'businesszip INTEGER,' +
         'estimatedsavings VARCHAR,' +
         'geocode0 VARCHAR,' +
@@ -160,10 +160,10 @@
             //TODO: DONE load into table here.
             var business = item.business.trim();
             if (business !== 'Unknown') {
-             var complaint = new Complaint(item);
-             complaint.insertRecord();
-             Complaint.allComplaints.push(complaint);
-           }
+              var complaint = new Complaint(item);
+              complaint.insertRecord();
+              Complaint.allComplaints.push(complaint);
+            }
             else {
               console.log('business name is unknown', item.business);
             }
