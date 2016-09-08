@@ -8,7 +8,6 @@
   homeController.index = function(ctx, next) {
     if(ctx.complaints.length) {
       complaintsView.index();
-      console.log(ctx.complaints);
       next();
     }
     else{
@@ -34,7 +33,7 @@
       next();
     };
     Complaint.searchByName(
-      ctx.params.businessName.replace('+', ' '), complaintsData);
+      unescape(ctx.params.businessName), complaintsData);
   };
 
   homeController.loadAll = function(ctx, next) {

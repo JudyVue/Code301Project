@@ -30,19 +30,6 @@
     });
   };
 
-
-  Complaint.findWhere = function(value, callback) {
-  webDB.execute(
-    [
-      {
-        sql: 'SELECT * FROM complaints WHERE business = ?;',
-        data: [value]
-      }
-    ],
-    callback
-  );
-};
-
   Complaint.searchByCategory = function(query, callback){
     var categoryArray = [];
     webDB.execute('SELECT * FROM complaints WHERE businesscategory = "' + query + '"' + ';', function(rows){
