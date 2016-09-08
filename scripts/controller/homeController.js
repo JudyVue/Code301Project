@@ -2,6 +2,7 @@
 
 (function(module) {
   var homeController = {};
+
   Complaint.createTable();
 
   homeController.index = function(ctx, next) {
