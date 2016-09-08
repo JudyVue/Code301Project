@@ -77,9 +77,11 @@
     return locArray;
   };
 
-
   Complaint.loadAll = function(rows){
-    Complaint.allComplaints = rows.map(function(ele){
+    Complaint.allComplaints = rows.map(function(ele) {
+      var complaints = inputData.sort(function(a,b) {
+        return (new Date(b.openedOn)) - (new Date(a.openedOn));
+      }).map(function(ele)
       return new Complaint(ele);
     });
   };
