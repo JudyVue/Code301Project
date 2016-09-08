@@ -53,7 +53,7 @@
   };
 
   Complaint.getMostRecentOpen = function(array) {
-   // return percentage of open claims of specific business location
+   // return most recent openclaim
     var mostRecentComplaint = null;
     array.map(function(ele) {
       if (ele.status !== 'Closed') {

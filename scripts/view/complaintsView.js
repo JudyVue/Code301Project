@@ -69,7 +69,6 @@
     $('#home').show();
     complaintsView.autoCompleteName();
     complaintsView.autoCompleteCategory();
-
   };
   // Complaint.updateData(complaintsView.renderIndexPage);
 
