@@ -56,6 +56,7 @@
       zip: complaints[0].businesszip !== 'undefined' ? complaints[0].businesszip : '',
       openClaims: (
         Complaint.openClaims(complaints) / complaints.length) * 100,
+        mostRecent: Complaint.getMostRecentOpen(complaints)
     };
     var renderedResult = complaintsView.renderWithHandlebars(
       '#company-name-template', viewObject);
