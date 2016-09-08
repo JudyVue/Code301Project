@@ -1,15 +1,11 @@
 
-section {
+/*section {
   outline: dotted 3px orange;
-}
+}*/
 
-header {
-  outline: dotted 3px black;
-}
-
-div {
+/*div {
   outline: dotted 3px green;
-}
+}*/
 
 #navigation {
   margin-bottom: 10px;
@@ -23,6 +19,13 @@ div {
   margin: 2px;
 }
 
+.search-home{
+  text-align: center;
+  margin: auto;
+  margin-top: 20%;
+}
+
+
 .ui-autocomplete {
   background: white;
 }
@@ -32,8 +35,9 @@ div {
 }
 
 li.ui-menu-item {
-  padding-top: 2px;
-  padding-bottom: 2px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  font-size: .8em;
 }
 
 .hidden {
