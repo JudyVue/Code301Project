@@ -55,9 +55,8 @@
       city: complaints[0].businesscity !== 'undefined' ? complaints[0].businesscity : '',
       state: complaints[0].businessstate !== 'undefined' ? complaints[0].businessstate : '',
       zip: complaints[0].businesszip !== 'undefined' ? complaints[0].businesszip : '',
-      openClaims: (
-        Complaint.openClaims(complaints) / complaints.length) * 100,
-        mostRecent: Complaint.getMostRecentOpen(complaints)
+      openClaims: ((
+        Complaint.openClaims(complaints) / complaints.length) * 100).toFixed(2),
     };
     var renderedResult = complaintsView.renderWithHandlebars(
       '#company-name-template', viewObject);
