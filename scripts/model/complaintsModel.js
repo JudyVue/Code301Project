@@ -2,7 +2,7 @@
   function Complaint(opts){
     Object.keys(opts).forEach(function(ele, index, keys){
       this[ele] = opts[ele];
-      //TODO: unpack geodata
+      this.business = opts.business.replace(/\//g, '-')
     }, this);
   }
 
@@ -56,15 +56,14 @@
    // return most recent openclaim
     var mostRecentComplaint = null;
     array.map(function(ele) {
-      if (ele.status !== 'Closed') {
-        if (mostRecentComplaint === null) {
+      if (mostRecentComplaint === null) {
+        mostRecentComplaint = ele.openeddate;
+      } else {
+        if (mostRecentComplaint.openeddate < ele.openeddate) {
           mostRecentComplaint = ele.openeddate;
-        } else {
-          if (mostRecentComplaint.openeddate < ele.openeddate) {
-            mostRecentComplaint = ele.openeddate;
-          }
         }
       }
+
     });
     return mostRecentComplaint;
   };
@@ -175,7 +174,7 @@
           data.forEach(function(item){
             //TODO: DONE load into table here.
             var business = item.business.trim();
-            if (business !== 'Unknown') {
+            if (!business.includes('Unknown')) {
               var complaint = new Complaint(item);
               complaint.insertRecord();
               Complaint.allComplaints.push(complaint);
