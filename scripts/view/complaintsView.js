@@ -49,8 +49,7 @@
   complaintsView.returnSearch = function(complaints){
     $('#results').show();
     $('#business_name').val('');
-    $('#search').removeClass('search-home');
-    var mostRecentDate = new Date(Complaint.getMostRecentOpen(complaints));
+    var mostRecentDate = new Date(Complaint.getMostRecent(complaints));
     var viewObject = {
       business: complaints[0].business,
       totalResults: complaints.length,
