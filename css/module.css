@@ -1,36 +1,42 @@
 
-/*section {
-  outline: dotted 3px orange;
-}*/
-
-/*div {
-  outline: dotted 3px green;
-}*/
+/*navigation*/
 
 #navigation {
   margin-bottom: 10px;
   padding-left: 20px;
+  padding-right: 20px;
+  position: relative;
   overflow: hidden;
 }
 
 #navigation h1 {
   display: inline-block;
   margin-top: 10px;
+  width: 50%;
 }
 
 #navigation ul {
+  font-size: .8em;
   text-align: right;
   display: inline-block;
   float: right;
+  width: 45%;
+  position: absolute;;
+  bottom: 0;
+  /*color: #edeec9;*/
 }
 
 #navigation ul li {
   display: inline-block;
-  padding: 2px;
-  margin: 2px;
-
+  padding: 4px;
+  margin: 4px;
 }
 
+#navigation a{
+  color: #2f343b;
+}
+
+/*results*/
 .company-name {
   font-weight: bold;
 }
@@ -52,8 +58,12 @@
 
 .search-results {
   margin-top: 0px;
+  width: 60%;
+  margin: auto;
+
 }
 
+/*searchbar*/
 .ui-autocomplete {
   background: white;
 }
