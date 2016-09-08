@@ -30,6 +30,7 @@
     }
     //search by name
     else if($('#business_name').val()){
+      $('#enter-name-alert').remove();
       var query = $('#business_name').val();
       page('/result/' + escape(query));
     }
@@ -38,8 +39,8 @@
       var query = $('#category_name').val();
       page('/category/' + query.val().replace(/\W+/g, '+'));
     }
-    else{
-      alert('Why are you trying to search nothing?');
+    else {
+      $('<h4 id="enter-name-alert">Please enter a business name</h4>').appendTo('#search-form h2');
     }
   }
   );
