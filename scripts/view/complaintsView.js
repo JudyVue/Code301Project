@@ -48,6 +48,7 @@
   complaintsView.returnSearch = function(complaints){
     $('#results').show();
     $('#business_name').val('');
+    var mostRecentDate = new Date(Complaint.getMostRecentOpen(complaints));
     var viewObject = {
       business: complaints[0].business,
       totalResults: complaints.length,
@@ -57,6 +58,7 @@
       zip: complaints[0].businesszip !== 'undefined' ? complaints[0].businesszip : '',
       openClaims: ((
         Complaint.openClaims(complaints) / complaints.length) * 100).toFixed(2),
+      mostRecent: mostRecentDate.toDateString()
     };
     var renderedResult = complaintsView.renderWithHandlebars(
       '#company-name-template', viewObject);

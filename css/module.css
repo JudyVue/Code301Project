@@ -13,12 +13,12 @@
   overflow: hidden;
 }
 
-#navigation h1{
+#navigation h1 {
   display: inline-block;
   margin-top: 10px;
 }
 
-#navigation ul{
+#navigation ul {
   text-align: right;
   display: inline-block;
   float: right;
@@ -31,13 +31,26 @@
 
 }
 
-.search-home{
+.company-name {
+  font-weight: bold;
+}
+
+.address li {
+  font-style: italic;
+  margin-bottom: .3em;
+}
+
+.meta-results li {
+  margin-bottom: .3em;
+}
+
+.search-home {
   text-align: center;
   margin: auto;
   margin-top: 20%;
 }
 
-.search-results{
+.search-results {
   margin-top: 0px;
 }
 

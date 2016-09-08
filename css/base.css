@@ -9,7 +9,6 @@ input {
   display: inline-block;
   border: solid gray 1px;
   width: 60%;
-
 }
 
 /*text styles*/
@@ -28,13 +27,11 @@ h2 {
 h3 {
   font-size: 1rem;
   margin-bottom: 5px;
-
 }
 
 h4 {
   font-size: 1rem;
-  margin-bottom: 5px;
-
+  margin-bottom: 0;
 }
 
 p {
@@ -54,16 +51,14 @@ a:hover {
 }
 
 /* button styles */
-button{
+button {
   background-color:#ABCC61;
   color: white;
-
   border: solid #ABCC61 2px;
   margin: 6px;
-
 }
 
-button:hover{
+button:hover {
   background-color: white;
   color: #ABCC61;
 }
