@@ -68,16 +68,27 @@
     return mostRecentComplaint;
   };
 
-  Complaint.numOfBusiness = function(categoryArray) {
-     // return num of complaints with unique business name (without dupes) matching a category search
-    var uniqueCategoryArray = [];
-    categoryArray.map(function(ele){
-      uniqueCategoryArray = categoryArray.filter(function(ele, index) {
-        return categoryArray.indexOf(ele) === index;
-      });
+  Complaint.getUniqueBusinessNames = function(array) {
+    uniqueCategoryArray = array.filter(function(ele, index) {
+      return array.indexOf(ele.business) === index;
     });
     console.log(uniqueCategoryArray);
+    return uniqueCategoryArray;
   };
+
+  Complaint.findComplaintsByBus = function(array, query) {
+    complaintsPerBusiness = array.filter(function(ele) {
+      return ele.business === query;
+    });
+  };
+
+  Complaint.searchAllBusinesses = function(array, callback){
+    array.forEach(function(ele) {
+      Complaint.findComplaintsByBus(ele);
+      callback();
+    });
+  };
+
 
   Complaint.getLocations = function(business) {
   //return num of locations of business that matched searched business name
