@@ -30,19 +30,6 @@
     });
   };
 
-
-  Complaint.findWhere = function(value, callback) {
-  webDB.execute(
-    [
-      {
-        sql: 'SELECT * FROM complaints WHERE business = ?;',
-        data: [value]
-      }
-    ],
-    callback
-  );
-};
-
   Complaint.searchByCategory = function(query, callback){
     var categoryArray = [];
     webDB.execute('SELECT * FROM complaints WHERE businesscategory = "' + query + '"' + ';', function(rows){
@@ -63,6 +50,23 @@
       }
     });
     return totalOpenArray.length;
+  };
+
+  Complaint.getMostRecentOpen = function(array) {
+   // return percentage of open claims of specific business location
+    var mostRecentComplaint = null;
+    array.map(function(ele) {
+      if (ele.status !== 'Closed') {
+        if (mostRecentComplaint === null) {
+          mostRecentComplaint = ele;
+        } else {
+          if (mostRecentComplaint.openeddate < ele.openeddate) {
+            mostRecentComplaint = ele;
+          }
+        }
+      }
+    });
+    return mostRecentComplaint;
   };
 
   Complaint.numOfBusiness = function(categoryArray) {
@@ -90,11 +94,10 @@
     return locArray;
   };
 
+
   Complaint.loadAll = function(rows){
-    Complaint.allComplaints = rows.map(function(ele) {
-      var complaints = inputData.sort(function(a,b) {
-        return (new Date(b.openedOn)) - (new Date(a.openedOn));
-      }).map(function(ele)
+    Complaint.allComplaints = rows.map(function(ele){
+
       return new Complaint(ele);
     });
   };
