@@ -9,14 +9,26 @@
 
 #navigation {
   margin-bottom: 10px;
+  padding-left: 20px;
+  overflow: hidden;
+}
+
+#navigation h1{
+  display: inline-block;
+  margin-top: 10px;
+}
+
+#navigation ul{
+  text-align: right;
+  display: inline-block;
+  float: right;
 }
 
 #navigation ul li {
   display: inline-block;
-  border: 1px solid #6186CC;
-  background-color: #ABCC61;
   padding: 2px;
   margin: 2px;
+
 }
 
 .search-home{
@@ -25,6 +37,9 @@
   margin-top: 20%;
 }
 
+.search-results{
+  margin-top: 0px;
+}
 
 .ui-autocomplete {
   background: white;
