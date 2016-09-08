@@ -68,12 +68,12 @@
     return mostRecentComplaint;
   };
 
-  Complaint.getUniqueBusinessNames = function(array) {
+  Complaint.getUniqueBusinessNames = function(array, callback) {
     uniqueCategoryArray = array.filter(function(ele, index) {
       return array.indexOf(ele.business) === index;
     });
     console.log(uniqueCategoryArray);
-    return uniqueCategoryArray;
+    callback(uniqueCategoryArray);
   };
 
   Complaint.findComplaintsByBus = function(array, query) {
