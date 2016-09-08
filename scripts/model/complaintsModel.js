@@ -52,6 +52,23 @@
     return totalOpenArray.length;
   };
 
+  Complaint.getMostRecentOpen = function(array) {
+   // return most recent openclaim
+    var mostRecentComplaint = null;
+    array.map(function(ele) {
+      if (ele.status !== 'Closed') {
+        if (mostRecentComplaint === null) {
+          mostRecentComplaint = ele.openeddate;
+        } else {
+          if (mostRecentComplaint.openeddate < ele.openeddate) {
+            mostRecentComplaint = ele.openeddate;
+          }
+        }
+      }
+    });
+    return mostRecentComplaint;
+  };
+
   Complaint.numOfBusiness = function(categoryArray) {
      // return num of complaints with unique business name (without dupes) matching a category search
     var uniqueCategoryArray = [];
@@ -80,6 +97,7 @@
 
   Complaint.loadAll = function(rows){
     Complaint.allComplaints = rows.map(function(ele){
+
       return new Complaint(ele);
     });
   };
