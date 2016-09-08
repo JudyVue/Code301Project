@@ -52,7 +52,7 @@
     return totalOpenArray.length;
   };
 
-  Complaint.getMostRecentOpen = function(array) {
+  Complaint.getMostRecent = function(array) {
    // return most recent openclaim
     var mostRecentComplaint = null;
     array.map(function(ele) {
@@ -96,7 +96,7 @@
     Complaint.allComplaints.map(function(ele) {
       if (ele.business === business) {
         if (locArray.indexOf(ele.businessstreetline1) < 0) {
-          locAarray.push(ele.businessstreetline1);
+          locArray.push(ele.businessstreetline1);
         }
       }
     });
