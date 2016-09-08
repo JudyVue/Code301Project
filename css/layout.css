@@ -2,8 +2,9 @@
 header {
   width: 100%;
   margin: 0 auto;
-  padding-left: 20px;
+  padding-top: 5px;
   background-color: #759925;
+  margin-bottom: 5em;
 
 }
 
@@ -27,7 +28,6 @@ main {
 
 
 footer {
-  outline: 1px dashed yellow;
   width:100%;
   font-size: .4em;
   color: white;
@@ -44,6 +44,9 @@ footer {
 
 
 @media only screen and (min-width: 320px) {
+  #search {
+    max-width: 60%;
+  }
 
 }
 
