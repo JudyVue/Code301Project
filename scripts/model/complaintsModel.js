@@ -58,10 +58,10 @@
     array.map(function(ele) {
       if (ele.status !== 'Closed') {
         if (mostRecentComplaint === null) {
-          mostRecentComplaint = ele;
+          mostRecentComplaint = ele.openeddate;
         } else {
           if (mostRecentComplaint.openeddate < ele.openeddate) {
-            mostRecentComplaint = ele;
+            mostRecentComplaint = ele.openeddate;
           }
         }
       }
