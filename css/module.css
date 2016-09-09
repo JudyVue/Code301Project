@@ -23,7 +23,7 @@
   width: 45%;
   position: absolute;;
   bottom: 0;
-  /*color: #edeec9;*/
+  color: #B9B1A8;
 }
 
 #navigation ul li {
@@ -36,6 +36,18 @@
   color: #2f343b;
 }
 
+#AG_logo {
+  border-radius: 50%;
+}
+
+#header-text {
+  color: #4B4D52;
+}
+
+#enter-name-alert {
+  color: red;
+}
+
 /*results*/
 .company-name {
   font-weight: bold;
@@ -44,10 +56,12 @@
 .address li {
   font-style: italic;
   margin-bottom: .3em;
+  font-size: .7rem;
 }
 
 .meta-results li {
   margin-bottom: .3em;
+  font-size: .7rem;
 }
 
 .search-home {
@@ -69,7 +83,7 @@
 }
 
 .ui-menu-item:hover {
-  background: #ABCC61;
+  background: #DE8642;
 }
 
 li.ui-menu-item {
@@ -80,4 +94,15 @@ li.ui-menu-item {
 
 .hidden {
   display: none;
+}
+
+@media only screen and (min-width: 675px) {
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  a {
+    font-size: 1.1rem;
+  }
+
 }
