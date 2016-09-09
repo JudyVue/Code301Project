@@ -36,8 +36,21 @@
   color: #2f343b;
 }
 
+#logo {
+  height: 25px;
+  weight: 25px;
+  border-radius: 50%;
+}
+
 #AG_logo {
   border-radius: 50%;
+}
+
+#complaint_logo {
+  height: 3%;
+  width: 6%;
+  border-radius: 25%;
+  opacity: 0.8;
 }
 
 #header-text {
@@ -96,13 +109,39 @@ li.ui-menu-item {
   display: none;
 }
 
+/*about*/
+.block team-paragraph {
+  display: inline-block;
+}
+
 @media only screen and (min-width: 675px) {
   h1 {
+    font-family: 'Poppins', sans-serif;
     font-size: 1.5rem;
   }
 
   a {
     font-size: 1.1rem;
+    font-family: 'Poppins', sans-serif;
+    color: #766151;
   }
 
+  p {
+    font-size: .8em;
+  }
+
+  h2 {
+    font-size: 1rem;
+  }
+
+  #complaint_logo {
+    height: 5%;
+    width: 7%;
+    border-radius: 25%;
+    opacity: 0.8;
+  }
+  #logo {
+    height: 75px;
+    weight: 75px;
+  }
 }
