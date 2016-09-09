@@ -112,6 +112,7 @@ li.ui-menu-item {
 /*about*/
 .block team-paragraph {
   display: inline-block;
+  float: left;
 }
 
 @media only screen and (min-width: 675px) {
@@ -128,6 +129,7 @@ li.ui-menu-item {
 
   p {
     font-size: .8em;
+    width: 50%;
   }
 
   h2 {
@@ -144,4 +146,18 @@ li.ui-menu-item {
     height: 75px;
     weight: 75px;
   }
+
+  #search-button {
+    width: 30%;
+    font-size: .8rem;
+  }
+
+  /*#search-form {
+    max-width: 75%;
+  }*/
+
+  #business_name {
+    width: 72%;
+  }
+
 }
