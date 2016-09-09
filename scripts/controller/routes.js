@@ -9,7 +9,8 @@ page('/about', aboutController.reveal);
 page('/result/:businessName',
   complaintController.loadByName,
   complaintController.index,
-  complaintController.returnSearch
+  complaintController.returnSearch,
+  complaintController.returnSearchName
 );
 
 page('/category/:category',
@@ -17,6 +18,7 @@ page('/category/:category',
   complaintController.loadBizOfCategory,
   complaintController.loadByEachBizInCategory,
   complaintController.index,
+  complaintController.returnSearch,
   complaintController.returnCategorySearch
 );
 
