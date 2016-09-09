@@ -10,9 +10,9 @@
   };
 
   complaintsView.autoCompleteName = function() {
-    complaintsView.allCategories = Complaint.selectUniqueInColumn('business');
+    complaintsView.allNames = Complaint.selectUniqueInColumn('business');
     $('#search_input').autocomplete({
-      source: complaintsView.allCategories
+      source: complaintsView.allNames
     });
   };
 
@@ -27,7 +27,7 @@
     if (searchDomain === 'name') {
       $('#search_input').attr('placeholder', 'Search by Business Name');
       $('#search_input').autocomplete({
-        source: complaintsView.allCategories
+        source: complaintsView.allNames
       });
     } else {
       $('#search_input').attr('placeholder', 'Search by Category');
