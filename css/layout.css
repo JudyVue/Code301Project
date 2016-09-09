@@ -13,7 +13,7 @@ header h1 {
 main {
   width: 95%;
   margin: 0 auto;
-  margin-bottom: 30%;
+  margin-bottom: 10em;
 }
 
 #search-button {

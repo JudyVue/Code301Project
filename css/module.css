@@ -63,14 +63,27 @@
 
 /*results*/
 #results{
-  border-top: gray solid 1px;
   padding-top: 20px;
   padding-left: 10%;
   padding-right: 10%;
+
+}
+
+#results h4{
+  margin-bottom: 5px;
+  color: #4B4D52;
+}
+
+#results li{
+  color: #5e4d52;
 }
 
 .company-name {
   font-weight: bold;
+}
+
+.address{
+  margin-bottom: 20px;
 }
 
 .address li {
@@ -95,10 +108,11 @@
   margin-top: 0px;
   width: 80%;
   margin: auto;
+  margin-bottom: 2em;
 }
 
 .search-results-button{
-  display: inline;
+  display: inline !important;
   width: inherit !important;
 }
 
@@ -158,15 +172,54 @@ li.ui-menu-item {
     height: 75px;
     weight: 75px;
   }
+  #search{
+    /*margin-top: 10em;*/
+  }
+
+  #search-form input{
+    max-width: 60%;
+  }
+
+  #search-form h2{
+    font-size: 1.2rem;
+  }
 
   #search-button {
     width: 30%;
     font-size: .8rem;
+    display: block;
+    margin: auto;
   }
 
-  /*#search-form {
-    max-width: 75%;
-  }*/
+  #results{
+    margin: auto;
+  }
+
+  #results-by-Name{
+    width: 40%;
+    margin: auto;
+  }
+
+  #results-by-Name h4{
+    font-size: 1.6rem;
+  }
+
+  #results-by-Category{
+    width: 60%;
+    margin: auto;
+  }
+
+  .business-results{
+    margin-bottom: 20px;
+  }
+
+  #results-by-Category h4{
+    font-size: 1.2rem;
+  }
+
+  #results li{
+    font-size: 1rem;
+  }
 
   #business_name {
     width: 72%;
