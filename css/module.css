@@ -23,7 +23,7 @@
   width: 45%;
   position: absolute;;
   bottom: 0;
-  /*color: #edeec9;*/
+  color: #B9B1A8;
 }
 
 #navigation ul li {
@@ -36,6 +36,31 @@
   color: #2f343b;
 }
 
+#logo {
+  height: 25px;
+  weight: 25px;
+  border-radius: 50%;
+}
+
+#AG_logo {
+  border-radius: 50%;
+}
+
+#complaint_logo {
+  height: 3%;
+  width: 6%;
+  border-radius: 25%;
+  opacity: 0.8;
+}
+
+#header-text {
+  color: #4B4D52;
+}
+
+#enter-name-alert {
+  color: red;
+}
+
 /*results*/
 .company-name {
   font-weight: bold;
@@ -44,10 +69,12 @@
 .address li {
   font-style: italic;
   margin-bottom: .3em;
+  font-size: .7rem;
 }
 
 .meta-results li {
   margin-bottom: .3em;
+  font-size: .7rem;
 }
 
 .search-home {
@@ -69,7 +96,7 @@
 }
 
 .ui-menu-item:hover {
-  background: #ABCC61;
+  background: #DE8642;
 }
 
 li.ui-menu-item {
@@ -80,4 +107,41 @@ li.ui-menu-item {
 
 .hidden {
   display: none;
+}
+
+/*about*/
+.block team-paragraph {
+  display: inline-block;
+}
+
+@media only screen and (min-width: 675px) {
+  h1 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.5rem;
+  }
+
+  a {
+    font-size: 1.1rem;
+    font-family: 'Poppins', sans-serif;
+    color: #766151;
+  }
+
+  p {
+    font-size: .8em;
+  }
+
+  h2 {
+    font-size: 1rem;
+  }
+
+  #complaint_logo {
+    height: 5%;
+    width: 7%;
+    border-radius: 25%;
+    opacity: 0.8;
+  }
+  #logo {
+    height: 75px;
+    weight: 75px;
+  }
 }
