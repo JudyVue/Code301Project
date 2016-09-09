@@ -6,7 +6,8 @@
   function Complaint(opts){
     Object.keys(opts).forEach(function(ele){
       this[ele] = opts[ele];
-      this.business = opts.business.replace(/\//g, '-');
+      this.business = opts.business.replace(/\//g, '-').replace(/\+/g, '-');
+      this.businesscategory = opts.businesscategory.replace(/\//g, '-').replace(/\+/g, '-');
     }, this);
   }
 
