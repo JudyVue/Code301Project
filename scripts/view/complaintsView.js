@@ -21,29 +21,31 @@
     });
   };
 
+  $('#search-domain').change(function(event) {
+    $('#search_input').val('');
+    var searchDomain = $('#search-domain').val();
+    if (searchDomain === 'name') {
+      $('#search_input').attr('placeholder', 'Search by Business Name');
+      $('#search_input').autocomplete({
+        source: Complaint.selectUniqueInColumn('business')
+      });
+    } else {
+      $('#search_input').attr('placeholder', 'Search by Category');
+      $('#search_input').autocomplete({
+        source: Complaint.selectUniqueInColumn('businesscategory')
+      });
+    }
+  });
+
   $('#search-form').on('submit', function(event){
     event.preventDefault();
-
-    //if they've entered both
-    if($('#business_name').val() && $('#category_name').val()){
-      alert('You can only search either by business name or by category');
-    }
-    //search by name
-    else if($('#business_name').val()){
+    var searchDomain = $('#search-domain').val();
+    var query = $('#search_input').val();
+    if (searchDomain === 'name') {
       $('#enter-name-alert').remove();
-      var query = $('#business_name').val();
       page('/result/' + escape(query));
-    }
-    //search by category
-    else if ($('#category_name').val()) {
-      var query = $('#category_name').val();
+    } else {
       page('/category/' + escape(query));
-    }
-    else {
-      if ($('#enter-name-alert')) {
-        $('#enter-name-alert').remove();
-      }
-      $('<h4 id="enter-name-alert">Please enter a business name</h4>').appendTo('#search-form h2');
     }
   });
 
@@ -83,6 +85,7 @@
     $('#home').show();
     $('#search').addClass('search-home');
     $('#search-button').removeClass('search-results-button');
+    $('#search-domain').trigger('change');
     complaintsView.autoCompleteName();
     complaintsView.autoCompleteCategory();
   };
