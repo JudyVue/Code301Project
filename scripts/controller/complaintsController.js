@@ -72,7 +72,7 @@
     Complaint.complaintsInCategory = ctx.complaints;
     ctx.complaintsByBussiness = Complaint.searchAllBusinesses(ctx)
       .sort(function(a, b){
-
+        return a.totalResults - b.totalResults
       });
     console.log(ctx.complaintsByBussiness);
     next();

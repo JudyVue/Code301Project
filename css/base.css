@@ -10,6 +10,7 @@ input {
   display: inline-block;
   border: solid gray 1px;
   width: 60%;
+  margin-bottom: 10px;
 }
 
 /*text styles*/
