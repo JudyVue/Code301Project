@@ -1,0 +1,1 @@
+!function(e){function t(){}function n(){}"complete"===document.readyState?n():(document.addEventListener("DOMContentLoaded",function(){t("DOMContentLoaded",document.readyState),"complete"===document.readyState&&n()}),document.onreadystatechange=function(){t("onreadystatechange",document.readyState),"complete"===document.readyState&&n()})}(window);
