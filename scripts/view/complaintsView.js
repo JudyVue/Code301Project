@@ -40,10 +40,13 @@
       page('/category/' + escape(query));
     }
     else {
-      $('<h4 id="enter-name-alert">Please enter a business name</h4>').appendTo('#search-form h2');
+        if ($('#enter-name-alert')) {
+          $('#enter-name-alert').remove();
+        }
+        $('<h4 id="enter-name-alert">Please enter a business name</h4>').appendTo('#search-form h2');
+      }
     }
-  }
-  );
+    );
 
 
   complaintsView.returnSearch = function(complaints){
