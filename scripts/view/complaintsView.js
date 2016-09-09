@@ -52,8 +52,9 @@
   complaintsView.returnSearch = function(){
     $('#results').show();
     $('#search').removeClass('search-home');
+    $('#search').addClass('search-results');
     $('#search-button').addClass('search-results-button');
-  }
+  };
 
   complaintsView.returnSearchName = function(complaints){
     var mostRecentDate = new Date(Complaint.getMostRecent(complaints));
@@ -76,13 +77,14 @@
   complaintsView.returnCategorySearch = function(complaint){
     var renderedResult = complaintsView.renderWithHandlebars(
       '#category-template', complaint);
-    $('#results-by-Name').append(renderedResult);
+    $('#results-by-Category').append(renderedResult);
   };
 
   complaintsView.index = function(callback){
     $('#about').hide();
     $('#results').children().children().remove();
     $('#home').show();
+    $('#search-button').removeClass('search-results-button'); $('#search').removeClass('search-results');
     $('#search').addClass('search-home');
     $('#search-button').removeClass('search-results-button');
     $('#search-domain').trigger('change');
