@@ -25,12 +25,11 @@
     </script>
 
     <script id="category-template" type="text/x-handlebars-template">
-      <h4>You searched for: {{businesscategory}} </h4>
+      <h4 id="{{business}}" class="company-name">{{business}}</h4>
         <ul class="meta-results">
-          <li>Total Businesses: {{returnedResults.length}}</li>
+          <li>Has {{totalResults}} complaint(s) filed </li>
         </ul>
-        <ul class="all-results">
-        </ul>
+
     </script>
 
   </head>
@@ -38,7 +37,7 @@
   <body>
     <header>
       <nav id="navigation">
-        <h1 id="header-text"><img id="logo" src="images/Team_Logo.jpg">Business Complaint Finder</h1>
+        <h1 id="header-text"><img id="logo" src="/images/Team_Logo.jpg">Business Complaint Finder</h1>
           <ul>
             <li><a href="/">Home</a></li>
             <li><a href="/about">About</a></li>
@@ -55,9 +54,9 @@
               <input id="business_name" type="search" placeholder="Business Name">
               </input>
             </label>
-            <label class="hidden">
+            <label class="">
               Type in a Business Category
-              <input id="category_name">
+              <input id="category_name" placeholder="Business Category">
               </input>
             </label>
             <button id="search-button" type="submit">Search</button>
@@ -80,7 +79,7 @@
 
           <h2>About the Washington State Attorney General</h2>
           <section id= "logo-img" class="block image">
-            <img id="AG_logo" src="images/AG_logo.jpeg" alt="HTML5 Icon" width="75" height="75">
+            <img id="AG_logo" src="/images/AG_logo.jpeg" alt="HTML5 Icon" width="75" height="75">
           </section>
           <section id= "atg-description" class="block about-paragraph">
             <p> The Washington State Attorney General's Office handles multiple complaints that consumers file against private businesses. The office further investigates the claim in order to resolve the consumer's issue. Some complaints may result in the consumer receiving compensation. Other complaints may result in a favorable decision toward the business.</p>
@@ -93,7 +92,7 @@
 
         <article id="about-complaint">
           <h2><strong> Have a complaint against a business? </strong></h2>
-          <p>You can file one here: <a href="https://fortress.wa.gov/atg/formhandler/ago/ComplaintForm.aspx"><img id="complaint_logo" src="images/complaints_key.jpeg"></a></p>
+          <p>You can file one here: <a href="https://fortress.wa.gov/atg/formhandler/ago/ComplaintForm.aspx"><img id="complaint_logo" src="/images/complaints_key.jpeg"></a></p>
         </article>
 
         <article class="team">
@@ -139,8 +138,7 @@
     <script src="/scripts/view/complaintsView.js"></script>
 
     <!-- controller scripts -->
-    <script src="/scripts/controller/homeController.js"></script>
-    <script src="/scripts/controller/resultsController.js"></script>
+    <script src="/scripts/controller/complaintsController.js"></script>
     <script src="/scripts/controller/aboutController.js"></script>
     <script src="/scripts/controller/routes.js"></script>
 

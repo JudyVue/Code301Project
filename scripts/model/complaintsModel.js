@@ -2,7 +2,7 @@
   function Complaint(opts){
     Object.keys(opts).forEach(function(ele, index, keys){
       this[ele] = opts[ele];
-      this.business = opts.business.replace(/\//g, '-')
+      this.business = opts.business.replace(/\//g, '-');
     }, this);
   }
 
@@ -69,40 +69,46 @@
   };
 
   Complaint.getUniqueBusinessNames = function(array) {
-    uniqueCategoryArray = array.filter(function(ele, index) {
-      return array.indexOf(ele.business) === index;
+    var uniqueCategoryArray = array.map(function(ele){
+      return ele.business;
+    })
+    .filter(function(ele, index, array) {
+      return array.indexOf(ele) === index;
     });
-    console.log(uniqueCategoryArray);
+    // console.log(Complaint.uniqueCategoryArray);
     return uniqueCategoryArray;
   };
 
-  Complaint.findComplaintsByBus = function(array, query) {
-    complaintsPerBusiness = array.filter(function(ele) {
-      return ele.business === query;
+  Complaint.findComplaintsByBus = function(businessName, ctx) {
+    console.log(ctx.complaints);
+    var complaints = Complaint.complaintsInCategory.filter(function(complaint) {
+      return complaint.business === businessName;
     });
+    return {
+      business: businessName,
+      complaints: complaints,
+      totalResults: complaints.length
+    };
   };
 
-  Complaint.searchAllBusinesses = function(array, callback){
-    array.forEach(function(ele) {
-      Complaint.findComplaintsByBus(ele);
-      callback();
-    });
+  Complaint.searchAllBusinesses = function(ctx){
+    return ctx.bussinessesInCat.map(Complaint.findComplaintsByBus, ctx)
   };
 
-
-  Complaint.getLocations = function(business) {
-  //return num of locations of business that matched searched business name
-    var locArray = [];
-    Complaint.allComplaints.map(function(ele) {
-      if (ele.business === business) {
-        if (locArray.indexOf(ele.businessstreetline1) < 0) {
-          locArray.push(ele.businessstreetline1);
-        }
-      }
-    });
-    console.log(locArray);
-    return locArray;
-  };
+  //
+  // Complaint.getLocations = function(business) {
+  // //return num of locations of business that matched searched business name
+  //   var locArray = [];
+  //   Complaint.allComplaints.map(function(ele) {
+  //     if (ele.business === business) {
+  //       if (locArray.indexOf(ele.businessstreetline1) < 0) {
+  //         locArray.push(ele.businessstreetline1);
+  //       }
+  //     }
+  //   });
+  //   console.log(locArray);
+  //   return locArray;
+  // };
 
 
   Complaint.loadAll = function(rows){
@@ -178,30 +184,28 @@
   };
 
   Complaint.updateData = function(callback) {
-    webDB.execute('SELECT * FROM complaints', function(rows) {
-      if (!rows.length){
-        $.get('https://data.wa.gov/resource/fuxx-yeeu.json?&$$app_token=fi6PA6s5JICb5OJ323FV5nYsy&$limit=500')
-        .done(function(data) {
-          data.forEach(function(item){
-            //TODO: DONE load into table here.
-            var business = item.business.trim();
-            if (!business.includes('Unknown')) {
-              var complaint = new Complaint(item);
-              complaint.insertRecord();
-              Complaint.allComplaints.push(complaint);
-            }
-            else {
-              console.log('business name is unknown', item.business);
-            }
-          });
-          callback();
-        });
-      }
-      else{
-        Complaint.loadAll(rows);
-        callback();
-      }
-    });
+   webDB.execute('SELECT * FROM complaints', function(rows) {
+     if (!rows.length){
+       $.get('https://data.wa.gov/resource/fuxx-yeeu.json?&$$app_token=fi6PA6s5JICb5OJ323FV5nYsy')
+       .done(function(data) {
+         data.forEach(function(item){
+           var business = item.business.trim();
+           if (!business.includes('Unknown')){
+             if(item.hasOwnProperty('businesscategory')){
+               var complaint = new Complaint(item);
+               complaint.insertRecord();
+               Complaint.allComplaints.push(complaint);
+             }
+           }
+         });
+         callback();
+       });
+     }
+     else{
+       Complaint.loadAll(rows);
+       callback();
+     }
+   });
   };
 
   Complaint.withAttribute = function(attr) {
