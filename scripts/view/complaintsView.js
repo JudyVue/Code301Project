@@ -40,18 +40,20 @@
       page('/category/' + escape(query));
     }
     else {
-        if ($('#enter-name-alert')) {
-          $('#enter-name-alert').remove();
-        }
-        $('<h4 id="enter-name-alert">Please enter a business name</h4>').appendTo('#search-form h2');
+      if ($('#enter-name-alert')) {
+        $('#enter-name-alert').remove();
       }
+      $('<h4 id="enter-name-alert">Please enter a business name</h4>').appendTo('#search-form h2');
     }
-    );
+  });
 
-
-  complaintsView.returnSearch = function(complaints){
+  complaintsView.returnSearch = function(){
     $('#results').show();
-    $('#business_name').val('');
+    $('#search').removeClass('search-home');
+    $('#search-button').addClass('search-results-button');
+  }
+
+  complaintsView.returnSearchName = function(complaints){
     var mostRecentDate = new Date(Complaint.getMostRecent(complaints));
     var viewObject = {
       business: complaints[0].business,
@@ -70,8 +72,6 @@
   };
 
   complaintsView.returnCategorySearch = function(complaint){
-    $('#results').show();
-    $('#business_name').val('');
     var renderedResult = complaintsView.renderWithHandlebars(
       '#category-template', complaint);
     $('#results-by-Name').append(renderedResult);
@@ -81,10 +81,11 @@
     $('#about').hide();
     $('#results').children().children().remove();
     $('#home').show();
+    $('#search').addClass('search-home');
+    $('#search-button').removeClass('search-results-button');
     complaintsView.autoCompleteName();
     complaintsView.autoCompleteCategory();
   };
-  // Complaint.updateData(complaintsView.renderIndexPage);
 
   module.complaintsView = complaintsView;
 })(window);

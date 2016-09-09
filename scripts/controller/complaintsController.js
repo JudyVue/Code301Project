@@ -18,7 +18,18 @@
   complaintController.returnSearch = function(ctx, next) {
     if(ctx.complaints.length) {
       console.log('calling return search');
-      complaintsView.returnSearch(ctx.complaints);
+      complaintsView.returnSearch();
+      next();
+    }
+    else{
+      page('/');
+    };
+  };
+
+  complaintController.returnSearchName = function(ctx, next) {
+    if(ctx.complaints.length) {
+      console.log('calling return search');
+      complaintsView.returnSearchName(ctx.complaints);
     }
     else{
       page('/');
@@ -59,7 +70,10 @@
 
   complaintController.loadByEachBizInCategory = function(ctx, next){
     Complaint.complaintsInCategory = ctx.complaints;
-    ctx.complaintsByBussiness = Complaint.searchAllBusinesses(ctx);
+    ctx.complaintsByBussiness = Complaint.searchAllBusinesses(ctx)
+      .sort(function(a, b){
+
+      });
     console.log(ctx.complaintsByBussiness);
     next();
   };
