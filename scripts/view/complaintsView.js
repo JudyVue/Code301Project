@@ -9,22 +9,30 @@
     return template(data);
   };
 
-  complaintsView.autoCompleteName = Complaint.selectUniqueInColumn('business');
+  complaintsView.autoCompleteName = function() {
+    complaintsView.allCategories = Complaint.selectUniqueInColumn('business');
+    $('#search_input').autocomplete({
+      source: complaintsView.allCategories
+    });
+  };
 
-  complaintsView.autoCompleteCategory =  Complaint.selectUniqueInColumn('businesscategory')
+  complaintsView.autoCompleteCategory = function() {
+    complaintsView.allCategories = Complaint.selectUniqueInColumn('businesscategory');
+  };
 
   $('#search-domain').change(function(event) {
+    event.preventDefault();
     $('#search_input').val('');
     var searchDomain = $('#search-domain').val();
     if (searchDomain === 'name') {
       $('#search_input').attr('placeholder', 'Search by Business Name');
       $('#search_input').autocomplete({
-        source: complaintsView.autoCompleteName
+        source: complaintsView.allCategories
       });
     } else {
       $('#search_input').attr('placeholder', 'Search by Category');
       $('#search_input').autocomplete({
-        source: complaintsView.autoCompleteCategory
+        source: complaintsView.allCategories
       });
     }
   });
@@ -88,7 +96,9 @@
     $('#search-button').removeClass('search-results-button'); $('#search').removeClass('search-results');
     $('#search').addClass('search-home');
     $('#search-button').removeClass('search-results-button');
-    $('#search-domain').trigger('change');
+    $('#search-domain').change();
+    complaintsView.autoCompleteName();
+    complaintsView.autoCompleteCategory();
 
   };
 

@@ -157,7 +157,7 @@ li.ui-menu-item {
 
   p {
     font-size: .8em;
-    width: 50%;
+    /*width: 50%;*/
   }
 
   h2 {
@@ -240,5 +240,21 @@ li.ui-menu-item {
   #business_name {
     width: 72%;
   }
-
+  #about{
+    width: 60%;
+    margin: auto;
+    margin-top: 40px;
+  }
+  #about article{
+    margin-top: 20px;
+  }
+  .team-paragraph {
+    display: inline-block;
+    width: 20%;
+    margin: auto;
+    text-align: center;
+  }
+  .team-paragraph h3{
+    font-size: .8em;
+  }
 }
