@@ -89,7 +89,6 @@
 
   //when user searches by category, this function returns all businsses that fall under that category and how many complaints are filed against that business
   Complaint.findComplaintsByBus = function(businessName, ctx) {
-    console.log(ctx.complaints);
     var complaints = Complaint.complaintsInCategory.filter(function(complaint) {
       return complaint.business === businessName;
     });
@@ -210,6 +209,5 @@
   };
 
   //creating an empty table
-  Complaint.createTable();
   module.Complaint = Complaint;
 })(window);

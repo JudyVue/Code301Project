@@ -44,6 +44,8 @@
 
 #AG_logo {
   border-radius: 50%;
+  float: left;
+  padding: 5px;
 }
 
 #complaint_logo {
@@ -168,27 +170,41 @@ li.ui-menu-item {
     border-radius: 25%;
     opacity: 0.8;
   }
+
   #logo {
     height: 75px;
     weight: 75px;
   }
-  #search{
-    /*margin-top: 10em;*/
+
+  .search-home {
+    margin-top: 10em;
+    max-width: 60%;
+  }
+
+  .search-results {
+    width: 80%;
   }
 
   #search-form input{
     max-width: 60%;
+    height: 26px !important;
+    font-size: 1.2em;
   }
 
   #search-form h2{
-    font-size: 1.2rem;
+    font-size: 1.6rem;
+    margin-bottom: 20px;
   }
 
   #search-button {
     width: 30%;
-    font-size: .8rem;
+    font-size: 1.1rem;
     display: block;
     margin: auto;
+  }
+
+  .search-results-button{
+    height: 30px;
   }
 
   #results{

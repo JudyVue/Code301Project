@@ -17,7 +17,6 @@
 
   complaintController.returnSearch = function(ctx, next) {
     if(ctx.complaints.length) {
-      console.log('calling return search');
       complaintsView.returnSearch();
       next();
     }
@@ -28,7 +27,6 @@
 
   complaintController.returnSearchName = function(ctx, next) {
     if(ctx.complaints.length) {
-      console.log('calling return search');
       complaintsView.returnSearchName(ctx.complaints);
     }
     else{
@@ -40,7 +38,6 @@
   complaintController.returnCategorySearch = function(ctx, next) {
     if(ctx.bussinessesInCat.length) {
       ctx.complaintsByBussiness.forEach(function(ele){
-        // console.log(ctx.complaintsByBussiness)
         complaintsView.returnCategorySearch(ele);
       });
     }
@@ -54,7 +51,6 @@
     ctx.complaints = [];
     var complaintsData = function(array) {
       ctx.complaints = array;
-      // debugger;
       next();
     };
     Complaint.searchByCategory(
@@ -72,9 +68,8 @@
     Complaint.complaintsInCategory = ctx.complaints;
     ctx.complaintsByBussiness = Complaint.searchAllBusinesses(ctx)
       .sort(function(a, b){
-        return a.totalResults - b.totalResults
+        return a.totalResults - b.totalResults;
       });
-    console.log(ctx.complaintsByBussiness);
     next();
   };
 
@@ -96,7 +91,6 @@
       next();
     };
     if (Complaint.allComplaints.length) {
-      console.log('local data is being loaded into ctx');
       ctx.complaints = Complaint.allComplaints;
       next();
     }
@@ -104,7 +98,6 @@
       Complaint.updateData(complaintData);
     }
   };
-
 
   module.complaintController = complaintController;
 })(window);
