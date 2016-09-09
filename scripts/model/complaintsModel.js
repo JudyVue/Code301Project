@@ -7,6 +7,7 @@
     Object.keys(opts).forEach(function(ele){
       this[ele] = opts[ele];
       this.business = opts.business.replace(/\//g, '-');
+      this.businesscategory = opts.businesscategory.replace(/\//g, '-');
     }, this);
   }
 

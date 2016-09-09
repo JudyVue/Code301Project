@@ -9,17 +9,9 @@
     return template(data);
   };
 
-  complaintsView.autoCompleteName = function() {
-    $('#business_name').autocomplete({
-      source: Complaint.selectUniqueInColumn('business')
-    });
-  };
+  complaintsView.autoCompleteName = Complaint.selectUniqueInColumn('business');
 
-  complaintsView.autoCompleteCategory = function() {
-    $('#category_name').autocomplete({
-      source: Complaint.selectUniqueInColumn('businesscategory')
-    });
-  };
+  complaintsView.autoCompleteCategory =  Complaint.selectUniqueInColumn('businesscategory')
 
   $('#search-domain').change(function(event) {
     $('#search_input').val('');
@@ -27,12 +19,12 @@
     if (searchDomain === 'name') {
       $('#search_input').attr('placeholder', 'Search by Business Name');
       $('#search_input').autocomplete({
-        source: Complaint.selectUniqueInColumn('business')
+        source: complaintsView.autoCompleteName
       });
     } else {
       $('#search_input').attr('placeholder', 'Search by Category');
       $('#search_input').autocomplete({
-        source: Complaint.selectUniqueInColumn('businesscategory')
+        source: complaintsView.autoCompleteCategory
       });
     }
   });
@@ -41,11 +33,18 @@
     event.preventDefault();
     var searchDomain = $('#search-domain').val();
     var query = $('#search_input').val();
-    if (searchDomain === 'name') {
+    if (query){
       $('#enter-name-alert').remove();
-      page('/result/' + escape(query));
+      if (searchDomain === 'name') {
+        page('/result/' + escape(query));
+      } else {
+        page('/category/' + escape(query));
+      }
     } else {
-      page('/category/' + escape(query));
+      if ($('#enter-name-alert')) {
+        $('#enter-name-alert').remove();
+      }
+      $('<h4 id="enter-name-alert">Please enter a business name</h4>').appendTo('#search-form h2');
     }
   });
 
@@ -75,6 +74,8 @@
   };
 
   complaintsView.returnCategorySearch = function(complaint){
+    $('#search-domain').val('category');
+    $('#search-domain').change();
     var renderedResult = complaintsView.renderWithHandlebars(
       '#category-template', complaint);
     $('#results-by-Category').append(renderedResult);
@@ -88,8 +89,7 @@
     $('#search').addClass('search-home');
     $('#search-button').removeClass('search-results-button');
     $('#search-domain').trigger('change');
-    complaintsView.autoCompleteName();
-    complaintsView.autoCompleteCategory();
+
   };
 
   module.complaintsView = complaintsView;
