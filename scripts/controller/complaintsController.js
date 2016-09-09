@@ -28,8 +28,9 @@
 // render for search by Category
   complaintController.returnCategorySearch = function(ctx, next) {
     if(ctx.bussinessesInCat.length) {
-      ctx.bussinessesInCat.forEach(function(ele){
-        complaintsView.returnCategorySearch(ctx.bussinessesInCat);
+      ctx.complaintsByBussiness.forEach(function(ele){
+        // console.log(ctx.complaintsByBussiness)
+        complaintsView.returnCategorySearch(ele);
       });
     }
     else{

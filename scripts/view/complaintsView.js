@@ -66,6 +66,13 @@
     $('#results-by-Name').append(renderedResult);
   };
 
+  complaintsView.returnCategorySearch = function(complaint){
+    $('#results').show();
+    $('#business_name').val('');
+    var renderedResult = complaintsView.renderWithHandlebars(
+      '#category-template', complaint);
+    $('#results-by-Name').append(renderedResult);
+  };
 
   complaintsView.index = function(callback){
     $('#about').hide();

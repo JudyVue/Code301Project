@@ -2,7 +2,7 @@
   function Complaint(opts){
     Object.keys(opts).forEach(function(ele, index, keys){
       this[ele] = opts[ele];
-      this.business = opts.business.replace(/\//g, '-')
+      this.business = opts.business.replace(/\//g, '-');
     }, this);
   }
 
@@ -81,11 +81,13 @@
 
   Complaint.findComplaintsByBus = function(businessName, ctx) {
     console.log(ctx.complaints);
+    var complaints = Complaint.complaintsInCategory.filter(function(complaint) {
+      return complaint.business === businessName;
+    });
     return {
-      name: businessName,
-      complaints: Complaint.complaintsInCategory.filter(function(complaint) {
-        return complaint.business === businessName;
-      })
+      business: businessName,
+      complaints: complaints,
+      totalResults: complaints.length
     };
   };
 
@@ -182,30 +184,28 @@
   };
 
   Complaint.updateData = function(callback) {
-    webDB.execute('SELECT * FROM complaints', function(rows) {
-      if (!rows.length){
-        $.get('https://data.wa.gov/resource/fuxx-yeeu.json?&$$app_token=fi6PA6s5JICb5OJ323FV5nYsy&$limit=500')
-        .done(function(data) {
-          data.forEach(function(item){
-            //TODO: DONE load into table here.
-            var business = item.business.trim();
-            if (!business.includes('Unknown')) {
-              var complaint = new Complaint(item);
-              complaint.insertRecord();
-              Complaint.allComplaints.push(complaint);
-            }
-            else {
-              console.log('business name is unknown', item.business);
-            }
-          });
-          callback();
-        });
-      }
-      else{
-        Complaint.loadAll(rows);
-        callback();
-      }
-    });
+   webDB.execute('SELECT * FROM complaints', function(rows) {
+     if (!rows.length){
+       $.get('https://data.wa.gov/resource/fuxx-yeeu.json?&$$app_token=fi6PA6s5JICb5OJ323FV5nYsy')
+       .done(function(data) {
+         data.forEach(function(item){
+           var business = item.business.trim();
+           if (!business.includes('Unknown')){
+             if(item.hasOwnProperty('businesscategory')){
+               var complaint = new Complaint(item);
+               complaint.insertRecord();
+               Complaint.allComplaints.push(complaint);
+             }
+           }
+         });
+         callback();
+       });
+     }
+     else{
+       Complaint.loadAll(rows);
+       callback();
+     }
+   });
   };
 
   Complaint.withAttribute = function(attr) {
