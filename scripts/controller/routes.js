@@ -15,7 +15,9 @@ page('/result/:businessName',
 page('/category/:category',
   complaintController.loadAllByCategory,
   complaintController.loadBizOfCategory,
-  complaintController.loadByEachBizInCategory
+  complaintController.loadByEachBizInCategory,
+  complaintController.index,
+  complaintController.returnSearch
 );
 
 

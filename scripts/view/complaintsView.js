@@ -37,7 +37,7 @@
     //search by category
     else if ($('#category_name').val()) {
       var query = $('#category_name').val();
-      page('/category/' + query.val().replace(/\W+/g, '+'));
+      page('/category/' + escape(query));
     }
     else {
       $('<h4 id="enter-name-alert">Please enter a business name</h4>').appendTo('#search-form h2');

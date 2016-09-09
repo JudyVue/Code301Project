@@ -19,17 +19,30 @@
     if(ctx.complaints.length) {
       console.log('calling return search');
       complaintsView.returnSearch(ctx.complaints);
-
     }
     else{
       page('/');
     };
   };
 
-  complaintController.loadByCategory = function(ctx, next) {
+// render for search by Category
+  complaintController.returnCategorySearch = function(ctx, next) {
+    if(ctx.bussinessesInCat.length) {
+      ctx.bussinessesInCat.forEach(function(ele){
+        complaintsView.returnCategorySearch(ctx.bussinessesInCat);
+      });
+    }
+    else{
+      page('/');
+    };
+  };
+
+// handle data for search by Category
+  complaintController.loadAllByCategory = function(ctx, next) {
     ctx.complaints = [];
     var complaintsData = function(array) {
       ctx.complaints = array;
+      // debugger;
       next();
     };
     Complaint.searchByCategory(
@@ -37,23 +50,20 @@
   };
 
   complaintController.loadBizOfCategory = function(ctx, next) {
-    var complaintsData = function(array) {
-      ctx.bussinessesInCat = array;
-      next();
-    };
-    Complaint.getUniqueBusinessNames(
-      unescape(ctx.params.category), complaintsData);
+    ctx.bussinessesInCat = Complaint.getUniqueBusinessNames(
+      ctx.complaints);
+    next();
+
   };
 
-  complaintController.loadByEachBizInCategory = function(ctx, next) {
-    var complaintsData = function(array) {
-      ctx.complaints = array;
-      next();
-    };
-    Complaint.searchAllBusinesses(
-      ctx.bussinessesInCat, complaintsData);
+  complaintController.loadByEachBizInCategory = function(ctx, next){
+    Complaint.complaintsInCategory = ctx.complaints;
+    ctx.complaintsByBussiness = Complaint.searchAllBusinesses(ctx);
+    console.log(ctx.complaintsByBussiness);
+    next();
   };
 
+// handle data for search by businessName
   complaintController.loadByName = function(ctx, next) {
     ctx.complaints = [];
     var complaintsData = function(array) {
@@ -64,6 +74,7 @@
       unescape(ctx.params.businessName), complaintsData);
   };
 
+//load all data
   complaintController.loadAll = function(ctx, next) {
     var complaintData = function(allComplaints) {
       ctx.complaints = Complaint.allComplaints;

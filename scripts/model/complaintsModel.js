@@ -68,41 +68,45 @@
     return mostRecentComplaint;
   };
 
-  Complaint.getUniqueBusinessNames = function(array, callback) {
-    uniqueCategoryArray = array.filter(function(ele, index) {
-      return array.indexOf(ele.business) === index;
+  Complaint.getUniqueBusinessNames = function(array) {
+    var uniqueCategoryArray = array.map(function(ele){
+      return ele.business;
+    })
+    .filter(function(ele, index, array) {
+      return array.indexOf(ele) === index;
     });
-    console.log(uniqueCategoryArray);
-    callback(uniqueCategoryArray);
+    // console.log(Complaint.uniqueCategoryArray);
+    return uniqueCategoryArray;
   };
 
-  Complaint.findComplaintsByBus = function(array, query) {
-    complaintsPerBusiness = array.filter(function(ele) {
-      return ele.business === query;
-    });
+  Complaint.findComplaintsByBus = function(businessName, ctx) {
+    console.log(ctx.complaints);
+    return {
+      name: businessName,
+      complaints: Complaint.complaintsInCategory.filter(function(complaint) {
+        return complaint.business === businessName;
+      })
+    };
   };
 
-  Complaint.searchAllBusinesses = function(array, callback){
-    array.forEach(function(ele) {
-      Complaint.findComplaintsByBus(ele);
-      callback();
-    });
+  Complaint.searchAllBusinesses = function(ctx){
+    return ctx.bussinessesInCat.map(Complaint.findComplaintsByBus, ctx)
   };
 
-
-  Complaint.getLocations = function(business) {
-  //return num of locations of business that matched searched business name
-    var locArray = [];
-    Complaint.allComplaints.map(function(ele) {
-      if (ele.business === business) {
-        if (locArray.indexOf(ele.businessstreetline1) < 0) {
-          locArray.push(ele.businessstreetline1);
-        }
-      }
-    });
-    console.log(locArray);
-    return locArray;
-  };
+  //
+  // Complaint.getLocations = function(business) {
+  // //return num of locations of business that matched searched business name
+  //   var locArray = [];
+  //   Complaint.allComplaints.map(function(ele) {
+  //     if (ele.business === business) {
+  //       if (locArray.indexOf(ele.businessstreetline1) < 0) {
+  //         locArray.push(ele.businessstreetline1);
+  //       }
+  //     }
+  //   });
+  //   console.log(locArray);
+  //   return locArray;
+  // };
 
 
   Complaint.loadAll = function(rows){
